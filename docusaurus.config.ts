@@ -15,15 +15,16 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: 'https://shedboxai.github.io',
+  url: 'https://shedboxai.com',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'shedboxai', // Usually your GitHub org/user name.
-  projectName: 'shedboxai.github.io', // Usually your repo name.
+  organizationName: 'ShedBoxAI', // Usually your GitHub org/user name.
+  projectName: 'shedboxai-docs', // Usually your repo name.
+  deploymentBranch: 'gh-pages',
 
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
@@ -45,7 +46,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/shedboxai/shedboxai.github.io/tree/main/',
+            'https://github.com/ShedBoxAI/shedboxai-docs/tree/main/',
           // Version configuration
           lastVersion: 'v1.0',
           versions: {
@@ -65,7 +66,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/shedboxai/shedboxai.github.io/tree/main/',
+            'https://github.com/ShedBoxAI/shedboxai-docs/tree/main/',
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -99,7 +100,7 @@ const config: Config = {
         {to: '/blog', label: 'Blog', position: 'left'},
         {to: '/community', label: 'Community', position: 'left'},
         {
-          href: 'https://github.com/shedboxai/shedboxai',
+          href: 'https://github.com/ShedBoxAI/shedboxai-docs',
           label: 'GitHub',
           position: 'right',
         },
@@ -143,7 +144,7 @@ const config: Config = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              href: 'https://github.com/ShedBoxAI/shedboxai-docs',
             },
           ],
         },
