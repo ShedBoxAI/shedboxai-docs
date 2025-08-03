@@ -1,0 +1,338 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+.heroBanner {
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.quickPreview {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.codePreview {
+  background: #1e1e1e;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  padding: 1.5rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  overflow-x: auto;
+  color: #f8f8f2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Claude Code Section */
+.claudeCode {
+  padding: 5rem 0;
+  background: linear-gradient(135deg, #f6f7ff 0%, #e8f4fd 100%);
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.claudeCode h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.claudeSubtitle {
+  font-size: 1.25rem;
+  margin-bottom: 3rem;
+  color: var(--ifm-color-emphasis-800);
+}
+
+.claudeDemo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.claudeStep {
+  flex: 1;
+  min-width: 280px;
+  max-width: 320px;
+}
+
+.claudeStep h3 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+}
+
+.chatBubble {
+  background: #1976d2;
+  color: white;
+  padding: 1.5rem;
+  border-radius: 18px;
+  border-bottom-left-radius: 4px;
+  font-style: italic;
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+  margin-bottom: 1rem;
+}
+
+.introspectionBox {
+  background: white;
+  border: 2px solid #4caf50;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+}
+
+.introspectionBox ul {
+  margin: 1rem 0 0 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.introspectionBox li {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.generatedConfig {
+  background: #1e1e1e !important;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.generatedConfig pre {
+  margin: 0;
+  color: #f8f8f2 !important;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  overflow-x: auto;
+  background: transparent !important;
+}
+
+.arrow {
+  font-size: 2rem;
+  color: var(--ifm-color-primary);
+  font-weight: bold;
+  align-self: center;
+  margin: 0 1rem;
+}
+
+.claudeFeatures {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.claudeFeatures .feature {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.claudeFeatures .feature h4 {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  color: var(--ifm-color-primary);
+}
+
+.claudeFeatures .feature p {
+  margin: 0;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.95rem;
+}
+
+.claudeCta {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.claudeNote {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+/* Mobile Responsive for Claude Section */
+@media screen and (max-width: 768px) {
+  .claudeCode {
+    padding: 3rem 0;
+  }
+  
+  .claudeCode h2 {
+    font-size: 2rem;
+  }
+  
+  .claudeDemo {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .arrow {
+    transform: rotate(90deg);
+    margin: 1rem 0;
+  }
+  
+  .claudeStep {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Social Proof Section */
+.socialProof {
+  padding: 4rem 0;
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.statItem {
+  padding: 1.5rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.statItem h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+}
+
+.statItem p {
+  margin: 0;
+  color: var(--ifm-color-emphasis-700);
+}
+
+/* Get Started Section */
+.getStarted {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, var(--ifm-color-primary-light) 0%, var(--ifm-color-primary) 100%);
+  color: white;
+}
+
+.getStarted h2 {
+  color: white;
+  margin-bottom: 3rem;
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.step {
+  text-align: center;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.stepNumber {
+  width: 60px;
+  height: 60px;
+  background: white;
+  color: var(--ifm-color-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0 auto 1rem auto;
+}
+
+.step h3 {
+  color: white;
+  margin: 1rem 0;
+}
+
+.step code {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.finalCta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+  .buttons {
+    flex-direction: column;
+  }
+  
+  .quickPreview {
+    margin-top: 1rem;
+  }
+  
+  .codePreview {
+    font-size: 0.75rem;
+    padding: 1rem;
+  }
+
+  .socialProof {
+    padding: 2rem 0;
+  }
+
+  .getStarted {
+    padding: 2rem 0;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .stepsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .finalCta {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,66 @@
+[
+  {
+    "order_id": "ORD-2024-001",
+    "customer_id": 1001,
+    "amount": 150.00,
+    "date": "2024-06-15",
+    "category": "electronics",
+    "product": "Wireless Headphones"
+  },
+  {
+    "order_id": "ORD-2024-002",
+    "customer_id": 1003,
+    "amount": 320.00,
+    "date": "2024-07-01",
+    "category": "fashion",
+    "product": "Designer Jacket"
+  },
+  {
+    "order_id": "ORD-2024-003",
+    "customer_id": 1001,
+    "amount": 75.50,
+    "date": "2024-05-20",
+    "category": "books",
+    "product": "Technical Manual"
+  },
+  {
+    "order_id": "ORD-2024-004",
+    "customer_id": 1007,
+    "amount": 500.00,
+    "date": "2024-06-30",
+    "category": "electronics",
+    "product": "Smart TV"
+  },
+  {
+    "order_id": "ORD-2024-005",
+    "customer_id": 1009,
+    "amount": 89.99,
+    "date": "2024-07-05",
+    "category": "home",
+    "product": "Kitchen Appliance"
+  },
+  {
+    "order_id": "ORD-2024-006",
+    "customer_id": 1010,
+    "amount": 1200.00,
+    "date": "2024-06-20",
+    "category": "electronics",
+    "product": "Laptop Computer"
+  },
+  {
+    "order_id": "ORD-2024-007",
+    "customer_id": 1005,
+    "amount": 45.00,
+    "date": "2024-06-28",
+    "category": "books",
+    "product": "Novel Collection"
+  },
+  {
+    "order_id": "ORD-2024-008",
+    "customer_id": 1002,
+    "amount": 210.00,
+    "date": "2024-05-22",
+    "category": "fashion",
+    "product": "Running Shoes"
+  }
+]

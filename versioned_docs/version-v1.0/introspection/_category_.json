@@ -1,0 +1,8 @@
+{
+  "label": "Introspection",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "Automated data source analysis and documentation"
+  }
+}

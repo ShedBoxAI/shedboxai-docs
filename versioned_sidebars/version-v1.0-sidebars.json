@@ -1,0 +1,66 @@
+{
+  "tutorialSidebar": [
+    {
+      "type": "category",
+      "label": "Getting Started",
+      "items": [
+        "getting-started/installation",
+        "getting-started/quick-start", 
+        "getting-started/first-pipeline"
+      ]
+    },
+    {
+      "type": "doc",
+      "id": "claude-code-integration",
+      "label": "Claude Code Integration"
+    },
+    {
+      "type": "category",
+      "label": "Configuration",
+      "items": [
+        "configuration/data-sources",
+        "configuration/ai-interface",
+        "configuration/output-formats"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Operations",
+      "items": [
+        "operations/index",
+        "operations/contextual-filtering",
+        "operations/format-conversion",
+        "operations/summarization",
+        "operations/relationships",
+        "operations/templates",
+        "operations/advanced-operations"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Introspection",
+      "items": [
+        "introspection/overview",
+        "introspection/analyzers",
+        "introspection/documentation-generation"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "CLI Reference",
+      "items": [
+        "cli-reference/run-command",
+        "cli-reference/introspect-command"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Troubleshooting",
+      "items": [
+        "troubleshooting/common-issues",
+        "troubleshooting/debugging",
+        "troubleshooting/performance"
+      ]
+    }
+  ]
+}

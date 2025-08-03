@@ -1,0 +1,11 @@
+customer_id,name,email,total_spent,last_purchase_date,status
+1001,Sarah Johnson,sarah.j@email.com,2450.00,2024-06-15,active
+1002,Mike Chen,mike.chen@email.com,890.50,2024-05-22,active
+1003,Emily Rodriguez,emily.r@email.com,5620.00,2024-07-01,premium
+1004,David Kim,david.k@email.com,340.25,2024-03-10,inactive
+1005,Lisa Anderson,lisa.a@email.com,1250.75,2024-06-28,active
+1006,Robert Brown,robert.b@email.com,780.00,2024-04-12,active
+1007,Jennifer Taylor,jennifer.t@email.com,3200.00,2024-06-30,premium
+1008,Alex Martinez,alex.m@email.com,95.50,2024-02-15,inactive
+1009,Grace Wilson,grace.w@email.com,1890.25,2024-07-05,active
+1010,Thomas Lee,thomas.l@email.com,4500.00,2024-06-20,premium
