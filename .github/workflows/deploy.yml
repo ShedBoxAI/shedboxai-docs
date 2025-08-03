@@ -27,11 +27,11 @@ jobs:
         run: npm run build
 
       - name: Upload to GitHub Pages
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: build
 
       - name: Deploy to GitHub Pages
         id: deployment
         if: github.ref == 'refs/heads/main'
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
