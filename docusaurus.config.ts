@@ -100,7 +100,7 @@ const config: Config = {
         {to: '/blog', label: 'Blog', position: 'left'},
         {to: '/community', label: 'Community', position: 'left'},
         {
-          href: 'https://github.com/ShedBoxAI/shedboxai-docs',
+          href: 'https://github.com/ShedBoxAI/ShedBoxAI',
           label: 'GitHub',
           position: 'right',
         },
@@ -144,7 +144,7 @@ const config: Config = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/ShedBoxAI/shedboxai-docs',
+              href: 'https://github.com/ShedBoxAI/ShedBoxAI',
             },
           ],
         },

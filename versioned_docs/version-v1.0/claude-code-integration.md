@@ -4,6 +4,10 @@
 Transform **2-4 hours of manual YAML writing** into **5-10 minutes** with Claude Code's AI-powered configuration generation.
 :::
 
+:::danger Essential Resource Required
+**Download the [AI Assistant Guide](/AI_ASSISTANT_GUIDE.txt)** - This mandatory document must be provided to your LLM of choice. It contains the complete configuration syntax, operation patterns, and examples needed to generate accurate ShedBoxAI configurations.
+:::
+
 ## Why This Changes Everything
 
 ### The Traditional Way ❌
@@ -17,7 +21,7 @@ Transform **2-4 hours of manual YAML writing** into **5-10 minutes** with Claude
 ### The ShedBoxAI + Claude Code Way ✅
 **5-10 Minutes Total:**
 1. Run introspection: `shedboxai introspect config.yaml --include-samples -o analysis.md`
-2. Copy results to Claude Code
+2. Feed both the AI Assistant Guide and introspection results to Claude Code
 3. Ask: "Create a ShedBoxAI config that analyzes customer behavior"
 4. Get production-ready configuration instantly
 5. Run and see results
@@ -162,7 +166,11 @@ processing:
 
 ### Step 3: Generate Configuration with Claude Code
 
-Now comes the magic! Copy the entire introspection report and paste it into Claude Code with this prompt:
+Now comes the magic! First, provide Claude Code with both essential documents:
+1. The [AI Assistant Guide](/AI_ASSISTANT_GUIDE.txt) 
+2. Your introspection report (`analysis.md`)
+
+Then use this prompt:
 
 ```
 Using this ShedBoxAI data introspection, create a configuration that:
@@ -516,6 +524,7 @@ ai_interface:
 ## Next Steps
 
 ### Continue Learning
+- **[AI Assistant Guide](/AI_ASSISTANT_GUIDE.txt)** - Complete LLM cheatsheet for ShedBoxAI configuration generation
 - **[Getting Started Guide](./getting-started/installation.md)** - Complete installation and setup
 - **[Operations Reference](./operations/index.md)** - Understanding all available operations
 - **[Configuration Guide](./configuration/data-sources.md)** - Advanced data source configuration

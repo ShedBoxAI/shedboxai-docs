@@ -11,6 +11,10 @@ ShedBoxAI transforms complex data processing workflows into simple YAML configur
 
 The framework handles everything else: data connections, transformations, AI integration, and output formatting.
 
+:::tip AI-Powered Configuration
+Want to generate configurations with Claude Code or other AI assistants? Download the [AI Assistant Guide](/AI_ASSISTANT_GUIDE.txt) - it contains all the syntax patterns and examples needed for AI to create perfect ShedBoxAI configs for you.
+:::
+
 ## Your First Pipeline
 
 Let's create a simple pipeline that processes user data and generates insights.

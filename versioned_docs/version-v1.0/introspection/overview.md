@@ -202,6 +202,7 @@ Introspection fits into your workflow:
 ### AI Configuration Writing
 Introspection enables effortless configuration creation:
 - **Copy-paste to Claude Code**: "Create a ShedBoxAI config from this introspection report"
+- **Use the AI Assistant Guide**: Download our [AI Assistant Guide](/AI_ASSISTANT_GUIDE.txt) for comprehensive LLM instructions and configuration examples
 - **Intelligent operation suggestions**: Based on detected data patterns and relationships
 - **Error prevention**: Warns about common pitfalls before they happen
 - **Optimization recommendations**: Suggests performance improvements and best practices
