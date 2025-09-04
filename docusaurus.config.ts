@@ -75,11 +75,17 @@ const config: Config = {
         theme: {
           customCss: './src/css/custom.css',
         },
-        gtag: {
-          trackingID: 'G-T2YHM6JEG0',
-          anonymizeIP: true,
-        },
       } satisfies Preset.Options,
+    ],
+  ],
+
+  plugins: [
+    [
+      '@docusaurus/plugin-google-gtag',
+      {
+        trackingID: 'G-T2YHM6JEG0',
+        anonymizeIP: true,
+      },
     ],
   ],
 
