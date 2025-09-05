@@ -88,10 +88,41 @@ const config: Config = {
       },
     ],
   ],
-
   themeConfig: {
     // Replace with your project's social card
     image: 'img/logo.png',
+    metadata: [
+    {name: 'description', content: 'ShedBoxAI — Lightweight AI-powered data processing framework. Official website & documentation.'},
+    {name: 'keywords', content: 'shedboxai, shed box ai, ai framework, data processing, open source ai, ai pipeline'},
+    {property: 'og:title', content: 'ShedBoxAI — Official Site'},
+    {property: 'og:description', content: 'Lightweight AI-powered data processing framework. Official docs, blog & community.'},
+    {property: 'og:url', content: 'https://shedboxai.com'},
+    {property: 'og:image', content: 'https://shedboxai.com/img/logo.png'},
+    {property: 'twitter:card', content: 'summary_large_image'},
+    {property: 'twitter:site', content: '@ShedboxAI'}
+  ],
+  headTags: [
+    {
+      tagName: 'script',
+      attributes: { type: 'application/ld+json' },
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "SoftwareSourceCode",
+        "name": "ShedBoxAI",
+        "alternateName": ["shedboxai","Shed Box AI", "shedbox ai", "ShedBox AI"],
+        "url": "https://shedboxai.com",
+        "codeRepository": "https://github.com/ShedBoxAI/ShedBoxAI",
+        "programmingLanguage": ["Python","TypeScript"],
+        "author": { "@type": "Organization", "name": "ShedBoxAI" },
+        "sameAs": [
+          "https://github.com/ShedBoxAI/ShedBoxAI",
+          "https://shedboxai.com",
+          "https://x.com/ShedboxAI",
+          "https://shedboxai.com/docs/getting-started/installation"
+        ]
+      }),
+    },
+  ],
     navbar: {
       title: 'ShedBoxAI',
       logo: {
