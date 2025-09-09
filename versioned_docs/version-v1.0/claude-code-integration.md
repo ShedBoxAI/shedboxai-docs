@@ -1,7 +1,12 @@
+---
+description: Transform 2-4 hours of manual YAML writing into 5-10 minutes with Claude Code AI integration. The only data framework with AI-powered configuration generation.
+keywords: [claude code integration, ai powered configuration, automated yaml generation, ai data pipeline, shedboxai claude, configuration automation]
+---
+
 # Using ShedBoxAI with Claude Code
 
 :::tip The Game Changer
-Transform **2-4 hours of manual YAML writing** into **5-10 minutes** with Claude Code's AI-powered configuration generation.
+Transform **2-4 hours of manual YAML writing** into **5-10 minutes** with Claude Code's AI-powered configuration generation. The only data processing framework with built-in AI assistance.
 :::
 
 :::danger Essential Resource Required

@@ -1,6 +1,11 @@
+---
+description: ShedBoxAI quick start guide - build your first AI data pipeline in 5 minutes with YAML configuration. No coding required, just simple configuration files.
+keywords: [shedboxai quick start, ai data pipeline tutorial, yaml configuration guide, data processing framework, claude code integration]
+---
+
 # Quick Start
 
-Get up and running with ShedBoxAI in just a few minutes. This guide will walk you through creating your first data processing pipeline.
+Get up and running with ShedBoxAI in just a few minutes. This guide will walk you through creating your first AI-powered data processing pipeline with simple YAML configuration.
 
 ## Overview
 
@@ -108,9 +113,16 @@ template: "{{upper(concat(item.first_name, ' ', item.last_name))}}"
 ## Next Steps
 
 - [Build Your First Pipeline](./first-pipeline.md) - More detailed walkthrough
+- [Claude Code Integration](../claude-code-integration.md) - AI-powered configuration generation
 - [Configuration Guide](../configuration/data-sources.md) - Complete configuration reference
-- [Operations Reference](../operations/) - All available operations
-- [Examples](../examples/) - Real-world use cases
+- [Operations Reference](../operations/index.md) - All available operations
+- [Examples](../examples/index.md) - Real-world use cases
+
+## Advanced Features
+
+- [Data Introspection](../introspection/overview.md) - Automated data analysis
+- [AI Interface Configuration](../configuration/ai-interface.md) - Integrate with AI models
+- [Template Operations](../operations/templates.md) - Advanced data formatting
 
 ## Need Help?
 

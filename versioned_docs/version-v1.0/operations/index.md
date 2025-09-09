@@ -1,6 +1,11 @@
+---
+description: ShedBoxAI operations reference - 6 powerful data processing operations for filtering, conversion, summarization, relationships, and AI integration. Complete YAML examples.
+keywords: [shedboxai operations, data processing operations, yaml data transformation, contextual filtering, format conversion, ai data analysis]
+---
+
 # Operations Overview
 
-ShedBoxAI provides powerful data processing operations that can be combined to create sophisticated data pipelines. Each operation specializes in a specific aspect of data transformation and analysis.
+ShedBoxAI provides 6 powerful data processing operations that can be combined to create sophisticated AI-powered data pipelines. Each operation specializes in a specific aspect of data transformation and analysis.
 
 ## Core Operations
 
@@ -275,6 +280,13 @@ processing:
 ## Next Steps
 
 - [Configuration Guide](../configuration/data-sources.md) - Setting up data sources
+- [Claude Code Integration](../claude-code-integration.md) - AI-powered operation generation
 - [Expression Engine](./contextual-filtering.md#available-expression-functions) - Available functions and expressions
-- [Examples](../examples/) - Real-world pipeline examples
-- [Troubleshooting](../troubleshooting/common-issues.md) - Common issues and solutions
+- [Examples](../examples/index.md) - Real-world pipeline examples
+- [AI Interface Setup](../configuration/ai-interface.md) - Integrate AI models with operations
+
+## Advanced Topics
+
+- [Data Introspection](../introspection/overview.md) - Automated operation recommendations
+- [Performance Optimization](../troubleshooting/performance.md) - Optimize operation chains
+- [Troubleshooting](../troubleshooting/common-issues.md) - Common operation issues
