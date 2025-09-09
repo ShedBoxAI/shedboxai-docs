@@ -75,6 +75,63 @@ const config: Config = {
         theme: {
           customCss: './src/css/custom.css',
         },
+        sitemap: {
+          changefreq: 'weekly',
+          priority: null,
+          ignorePatterns: ['/tags/**'],
+          filename: 'sitemap.xml',
+          createSitemapItems: async (params) => {
+            const {defaultCreateSitemapItems, ...rest} = params;
+            const items = await defaultCreateSitemapItems(rest);
+            
+            return items.map((item) => {
+              // Homepage gets highest priority
+              if (item.url === 'https://shedboxai.com/') {
+                return {...item, priority: 1.0, changefreq: 'daily'};
+              }
+              
+              // Landing pages get high priority
+              if (item.url.includes('/claude-code-integration') || 
+                  item.url.includes('/ai-configuration-generation')) {
+                return {...item, priority: 0.9, changefreq: 'weekly'};
+              }
+              
+              // Blog posts get medium-high priority
+              if (item.url.includes('/blog/') && !item.url.includes('/blog/tags') && 
+                  !item.url.includes('/blog/archive') && !item.url.includes('/blog/authors')) {
+                return {...item, priority: 0.8, changefreq: 'weekly'};
+              }
+              
+              // Key documentation pages
+              if (item.url.includes('/docs/getting-started/') || 
+                  item.url.includes('/docs/claude-code-integration')) {
+                return {...item, priority: 0.7, changefreq: 'weekly'};
+              }
+              
+              // Other documentation
+              if (item.url.includes('/docs/')) {
+                return {...item, priority: 0.6, changefreq: 'weekly'};
+              }
+              
+              // Main section pages
+              if (item.url.includes('/community') || 
+                  item.url.includes('/marketplace')) {
+                return {...item, priority: 0.5, changefreq: 'weekly'};
+              }
+              
+              // Utility and tag pages get lower priority
+              if (item.url.includes('/tags/') || 
+                  item.url.includes('/archive') || 
+                  item.url.includes('/authors') ||
+                  item.url.includes('/markdown-page')) {
+                return {...item, priority: 0.3, changefreq: 'monthly'};
+              }
+              
+              // Default for other pages
+              return {...item, priority: 0.4, changefreq: 'weekly'};
+            });
+          },
+        },
       } satisfies Preset.Options,
     ],
   ],
