@@ -14,12 +14,11 @@ function HomepageHeader() {
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
         <Heading as="h1" className="hero__title">
-          Advanced Data Pipeline Tools with Agentic AI Analysis
+          The Best AI Data Pipeline Tool for Modern Teams
         </Heading>
         <p className="hero__subtitle">
-          The only data pipeline tool designed for AI agents to autonomously discover business insights. 
-          Unlike traditional data pipeline tools, ShedBoxAI enables true agentic data analysis with 
-          AI-powered configuration generation, Claude Code integration, and MCP-native automation.
+          Transform complex data processing workflows into simple YAML configuration. The leading data pipeline tool 
+          with AI-powered configuration generation, Claude Code integration, and enterprise-grade automation.
         </p>
         <div className={styles.buttons}>
           <Link
@@ -72,95 +71,19 @@ function SocialProofSection(): ReactNode {
       <div className="container">
         <div className="row">
           <div className="col col--12 text--center">
-            <h2>Why ShedBoxAI Beats Traditional Data Pipeline Tools</h2>
-            <div className={styles.comparison}>
-              <div className={styles.comparisonItem}>
-                <h4>🆚 Fivetran, Airbyte, Mage AI</h4>
-                <p><strong>Them:</strong> Human-designed workflows with AI assistance<br/>
-                <strong>ShedBoxAI:</strong> AI agents autonomously discover insights</p>
-              </div>
-              <div className={styles.comparisonItem}>
-                <h4>🆚 Traditional ETL Tools</h4>
-                <p><strong>Them:</strong> Manual configuration, hours of setup<br/>
-                <strong>ShedBoxAI:</strong> YAML data pipelines generated in minutes</p>
-              </div>
-              <div className={styles.comparisonItem}>
-                <h4>🆚 Code-First Platforms</h4>
-                <p><strong>Them:</strong> Engineers build complex workflows<br/>
-                <strong>ShedBoxAI:</strong> AI agents build workflows autonomously</p>
-              </div>
-            </div>
+            <h2>Why Teams Choose ShedBoxAI Over Other Data Pipeline Tools</h2>
             <div className={styles.statsGrid}>
               <div className={styles.statItem}>
-                <h3>🤖 Agentic AI</h3>
-                <p>First data pipeline tool designed for autonomous AI agents and MCP integration</p>
+                <h3>🤖 AI-Powered</h3>
+                <p>Only data pipeline tool with Claude Code integration for automated configuration</p>
               </div>
               <div className={styles.statItem}>
                 <h3>⚡ 10x Faster</h3>
-                <p>From 2-4 hours manual configuration to 5-10 minutes with AI generation</p>
+                <p>2-4 hours of manual work becomes 5-10 minutes with AI assistance</p>
               </div>
               <div className={styles.statItem}>
-                <h3>🏢 Agent-Ready</h3>
-                <p>Built for the emerging agent economy with autonomous insight discovery</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function AgenticDataAnalysisSection(): ReactNode {
-  return (
-    <section className={styles.agenticAnalysis}>
-      <div className="container">
-        <div className="row">
-          <div className="col col--12 text--center">
-            <h2>🤖 Agentic Data Analysis: Beyond AI-Assisted to AI-Autonomous</h2>
-            <p className={styles.agenticSubtitle}>
-              While other data pipeline tools help humans analyze faster, ShedBoxAI enables 
-              <strong> AI agents to discover insights completely autonomously</strong>
-            </p>
-            <div className={styles.agenticDemo}>
-              <div className={styles.agenticStep}>
-                <h3>Agent Input</h3>
-                <div className={styles.agentRequest}>
-                  "Analyze customer churn and find main drivers"
-                </div>
-              </div>
-              <div className={styles.arrow}>→</div>
-              <div className={styles.agenticStep}>
-                <h3>Autonomous Process</h3>
-                <div className={styles.autonomousProcess}>
-                  <ul>
-                    <li>🔍 Introspects data automatically</li>
-                    <li>🧠 Generates optimal configuration</li>
-                    <li>⚡ Runs analysis independently</li>
-                    <li>💡 Discovers insights autonomously</li>
-                  </ul>
-                </div>
-              </div>
-              <div className={styles.arrow}>→</div>
-              <div className={styles.agenticStep}>
-                <h3>Agent Output</h3>
-                <div className={styles.agentInsight}>
-                  "High churn correlates with customers who don't use Feature X within 30 days"
-                </div>
-              </div>
-            </div>
-            <div className={styles.agenticFeatures}>
-              <div className={styles.agenticFeature}>
-                <h4>🧠 Autonomous Insight Discovery</h4>
-                <p>AI agents do all analytical thinking - no human intervention required</p>
-              </div>
-              <div className={styles.agenticFeature}>
-                <h4>🔗 MCP-Native Integration</h4>
-                <p>Built for the agent ecosystem with native MCP server support</p>
-              </div>
-              <div className={styles.agenticFeature}>
-                <h4>🚀 Agent-First Design</h4>
-                <p>YAML configs perfect for AI generation, introspection API for agent understanding</p>
+                <h3>🏢 Enterprise Ready</h3>
+                <p>Production-grade data pipeline tool trusted by modern data teams</p>
               </div>
             </div>
           </div>
@@ -304,12 +227,11 @@ export default function Home(): ReactNode {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`${siteConfig.title} - Advanced Data Pipeline Tools with Agentic AI Analysis`}
-      description="The only data pipeline tool designed for AI agents to autonomously discover business insights. Features agentic data analysis, MCP integration, and AI-powered YAML configuration generation.">
+      title={`${siteConfig.title} - Best AI Data Pipeline Tool with Claude Code Integration`}
+      description="The leading data pipeline tool with AI-powered configuration generation, Claude Code integration, and YAML-based automation. 10x faster than traditional ETL tools.">
       <HomepageHeader />
       <main>
         <HomepageFeatures />
-        <AgenticDataAnalysisSection />
         <ClaudeCodeSection />
         <SocialProofSection />
         <GetStartedSection />
