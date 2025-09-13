@@ -78,7 +78,24 @@ const config: Config = {
         sitemap: {
           changefreq: 'weekly',
           priority: null,
-          ignorePatterns: ['/tags/**'],
+          ignorePatterns: [
+            '/tags/**',
+            '/docs/features',
+            '/docs/hooks', 
+            '/docs/installation',
+            '/docs/integrations',
+            '/docs/project-structure',
+            '/docs/troubleshooting',
+            '/docs/tools',
+            '/docs/typescript', 
+            '/docs/workflows',
+            '/docs/api-reference',
+            '/docs/quickstart',
+            '/docs/templates',
+            '/docs/configuration',
+            '/docs/custom-commands',
+            '/docs/deployment'
+          ],
           filename: 'sitemap.xml',
           createSitemapItems: async (params) => {
             const {defaultCreateSitemapItems, ...rest} = params;
@@ -142,6 +159,34 @@ const config: Config = {
       {
         trackingID: 'G-T2YHM6JEG0',
         anonymizeIP: true,
+      },
+    ],
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          // Redirect missing docs URLs to existing equivalents
+          {
+            to: '/docs/getting-started/installation',
+            from: ['/docs/installation', '/docs/quickstart'],
+          },
+          {
+            to: '/docs/configuration/data-sources',
+            from: '/docs/configuration',
+          },
+          {
+            to: '/docs/operations/templates',
+            from: '/docs/templates',
+          },
+          {
+            to: '/docs/troubleshooting/common-issues',
+            from: '/docs/troubleshooting',
+          },
+          {
+            to: '/docs/getting-started/installation',
+            from: ['/docs/features', '/docs/hooks', '/docs/integrations', '/docs/project-structure', '/docs/tools', '/docs/typescript', '/docs/workflows', '/docs/api-reference', '/docs/custom-commands', '/docs/deployment'],
+          },
+        ],
       },
     ],
   ],
