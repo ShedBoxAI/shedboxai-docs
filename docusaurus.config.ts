@@ -107,9 +107,12 @@ const config: Config = {
                 return {...item, priority: 1.0, changefreq: 'daily'};
               }
               
-              // Landing pages get high priority
+              // Landing pages get high priority  
               if (item.url.includes('/claude-code-integration') || 
-                  item.url.includes('/ai-configuration-generation')) {
+                  item.url.includes('/ai-configuration-generation') ||
+                  item.url.includes('/social-media-demographics') ||
+                  item.url.includes('/weather-ecommerce') ||
+                  item.url.includes('/economic-retail-analytics')) {
                 return {...item, priority: 0.9, changefreq: 'weekly'};
               }
               
