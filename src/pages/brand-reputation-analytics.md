@@ -30,7 +30,7 @@ Here's the shocking reality: Most enterprise reputation tools only track mention
 
 This guide shows you how to build a comprehensive brand reputation revenue analytics system using APIs and ShedBoxAI that rivals $100K+ enterprise platforms while providing the revenue insights traditional tools can't deliver.
 
-📥 **[Download Complete Configuration](./brand-reputation-revenue-correlation.yaml)** - Ready-to-use ShedBoxAI setup with Twitter, Google Reviews, Shopify, Stripe, and Yelp integrations.
+📥 **[Download Complete Configuration](/brand-reputation-revenue-correlation.yaml)** - Ready-to-use ShedBoxAI setup with Twitter, Google Reviews, Shopify, Stripe, and Yelp integrations.
 
 ---
 
@@ -178,7 +178,7 @@ Building custom social media analytics tools with ShedBoxAI provides advantages 
 
 The foundation of revenue-connected reputation analytics is comprehensive, real-time data collection across all reputation touchpoints.
 
-📥 **[Download Complete Production Configuration](./brand-reputation-revenue-correlation.yaml)** - Ready-to-use ShedBoxAI config with Twitter, Google Reviews, Shopify, Stripe, and Yelp integrations.
+📥 **[Download Complete Production Configuration](/brand-reputation-revenue-correlation.yaml)** - Ready-to-use ShedBoxAI config with Twitter, Google Reviews, Shopify, Stripe, and Yelp integrations.
 
 **Key Data Sources:**
 - **Social Media**: Twitter API v2 for brand mentions and engagement metrics
@@ -206,7 +206,7 @@ The configuration includes sophisticated prompts that analyze:
 4. Opportunities to leverage positive sentiment
 5. Specific action items for reputation management
 
-📥 **[View Full Processing Pipeline](./brand-reputation-revenue-correlation.yaml)** - See the complete correlation analysis configuration.
+📥 **[View Full Processing Pipeline](/brand-reputation-revenue-correlation.yaml)** - See the complete correlation analysis configuration.
 
 ### Step 3: Executive Dashboard and Reporting
 
@@ -433,7 +433,7 @@ Transform complex reputation data from sentiment analysis tools into actionable 
 
 Instead of building from scratch, download our tested production configuration that includes:
 
-📥 **[Brand Reputation Analytics Configuration](./brand-reputation-revenue-correlation.yaml)** - Complete ShedBoxAI setup with:
+📥 **[Brand Reputation Analytics Configuration](/brand-reputation-revenue-correlation.yaml)** - Complete ShedBoxAI setup with:
 
 - **5 Data Sources**: Twitter, Google Reviews, Shopify, Stripe, Yelp APIs
 - **Advanced Processing**: Filtering, aggregation, statistical analysis
@@ -465,14 +465,10 @@ Enterprise brand reputation analytics doesn't have to cost $500K+ annually. With
 
 **The path forward is clear:**
 
-1. **[Download the tested configuration](./brand-reputation-revenue-correlation.yaml)** - Validated with mock data
+1. **[Download the tested configuration](/brand-reputation-revenue-correlation.yaml)** - Validated with mock data
 2. **Replace API credentials** with your actual keys
 3. **Run initial analysis** within 15 minutes
 4. **Scale monitoring** across all reputation touchpoints
-
-**Ready to get started?** [**Start your free ShedBoxAI trial**](https://shedboxai.com/trial) and begin building your revenue-connected reputation analytics system today.
-
-**Need help?** Download our **[configuration validator](./validate-config.py)** to test your setup before going live.
 
 ---
 
@@ -499,7 +495,7 @@ Your brand reputation revenue analytics system will reveal critical insights:
 🤖 **AI Assistant Integration**: The configuration works seamlessly with AI assistants for automated analysis and reporting.
 
 ### Scale Your System
-1. **[Start Today](./brand-reputation-revenue-correlation.yaml)**: Download tested configuration - works in 15 minutes
+1. **[Start Today](/brand-reputation-revenue-correlation.yaml)**: Download tested configuration - works in 15 minutes
 2. **Add Platforms**: Expand beyond the 5 included APIs (Twitter, Google Reviews, Shopify, Stripe, Yelp)
 3. **Automate Monitoring**: Built-in daily aggregation and correlation analysis
 4. **Connect Revenue**: Pre-configured revenue correlation with statistical analysis
@@ -512,4 +508,4 @@ Your brand reputation revenue analytics system will reveal critical insights:
 
 ### Downloadable Resources
 
-- **[Production ShedBoxAI Configuration](./brand-reputation-revenue-correlation.yaml)** - Complete config with Twitter, Google Reviews, Shopify, Stripe, and Yelp APIs
+- **[Production ShedBoxAI Configuration](/brand-reputation-revenue-correlation.yaml)** - Complete config with Twitter, Google Reviews, Shopify, Stripe, and Yelp APIs
