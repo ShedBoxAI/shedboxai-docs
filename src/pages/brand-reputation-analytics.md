@@ -174,6 +174,11 @@ Building custom social media analytics tools with ShedBoxAI provides advantages 
 **Transparent ROI**: See exactly how reputation investments translate to revenue outcomes
 **Scalable Architecture**: Add new data sources and analytics capabilities as your business grows
 
+:::tip Setup Shedbox in 2 minutes
+
+[Installation](/docs/getting-started/installation) • [Download AI Guide](/AI_ASSISTANT_GUIDE.txt)
+:::
+
 ### Step 1: Data Collection Architecture
 
 The foundation of revenue-connected reputation analytics is comprehensive, real-time data collection across all reputation touchpoints.
