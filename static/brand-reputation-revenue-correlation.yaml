@@ -1,0 +1,239 @@
+# Brand Reputation Revenue Analytics - Production Configuration
+# Replace with your actual API credentials and brand details
+
+data_sources:
+  # Twitter API v2 - Brand mentions
+  twitter_mentions:
+    type: rest
+    url: "https://api.twitter.com/2/tweets/search/recent"
+    headers:
+      Authorization: "Bearer ${TWITTER_BEARER_TOKEN}"
+    options:
+      params:
+        query: "@yourbrand OR \"your brand name\" OR #yourbrand -is:retweet"
+        max_results: 100
+        tweet.fields: "created_at,author_id,public_metrics,context_annotations"
+        expansions: "author_id"
+    response_path: "data"
+
+  # Google Places API - Business reviews
+  google_reviews:
+    type: rest
+    url: "https://maps.googleapis.com/maps/api/place/details/json"
+    options:
+      params:
+        place_id: "${GOOGLE_PLACE_ID}"
+        fields: "reviews,rating,user_ratings_total"
+        key: "${GOOGLE_MAPS_API_KEY}"
+    response_path: "result.reviews"
+
+  # Shopify Orders API - Sales data
+  shopify_orders:
+    type: rest
+    url: "https://${SHOPIFY_STORE}.myshopify.com/admin/api/2023-10/orders.json"
+    headers:
+      X-Shopify-Access-Token: "${SHOPIFY_ACCESS_TOKEN}"
+    options:
+      params:
+        status: "any"
+        financial_status: "paid"
+        limit: 250
+        created_at_min: "2024-01-01T00:00:00Z"
+        fields: "created_at,total_price,customer,line_items"
+    response_path: "orders"
+
+  # Stripe Charges API - Payment data
+  stripe_charges:
+    type: rest
+    url: "https://api.stripe.com/v1/charges"
+    headers:
+      Authorization: "Bearer ${STRIPE_SECRET_KEY}"
+    options:
+      params:
+        limit: 100
+        created[gte]: "1704067200"  # Jan 1, 2024 timestamp
+        expand[]: "data.customer"
+    response_path: "data"
+
+  # Yelp Business Reviews
+  yelp_reviews:
+    type: rest
+    url: "https://api.yelp.com/v3/businesses/${YELP_BUSINESS_ID}/reviews"
+    headers:
+      Authorization: "Bearer ${YELP_API_KEY}"
+    options:
+      params:
+        limit: 50
+        sort_by: "newest"
+
+processing:
+  # Extract sentiment and filter by positivity/negativity
+  contextual_filtering:
+    twitter_mentions:
+      - field: "created_at"
+        condition: ">= 2024-01-01"
+        new_name: "recent_tweets"
+
+    google_reviews:
+      - field: "rating"
+        condition: ">= 4"
+        new_name: "positive_reviews"
+      - field: "rating"
+        condition: "<= 2"
+        new_name: "negative_reviews"
+
+    shopify_orders:
+      - field: "financial_status"
+        condition: "paid"
+        new_name: "completed_orders"
+
+    yelp_reviews:
+      - field: "rating"
+        condition: ">= 4"
+        new_name: "positive_yelp"
+      - field: "rating"
+        condition: "<= 2"
+        new_name: "negative_yelp"
+
+  # Extract relevant fields for analysis
+  format_conversion:
+    recent_tweets:
+      extract_fields: ["text", "created_at", "public_metrics", "author_id"]
+
+    positive_reviews:
+      extract_fields: ["text", "rating", "time", "author_name"]
+
+    negative_reviews:
+      extract_fields: ["text", "rating", "time", "author_name"]
+
+    completed_orders:
+      extract_fields: ["created_at", "total_price", "customer"]
+
+  # Generate revenue and sentiment statistics
+  content_summarization:
+    completed_orders:
+      method: "statistical"
+      fields: ["total_price"]
+      summarize: ["mean", "sum", "count", "max", "min", "std"]
+
+    recent_tweets:
+      method: "statistical"
+      fields: ["public_metrics.like_count", "public_metrics.retweet_count"]
+      summarize: ["sum", "mean", "max"]
+
+  # Aggregate daily metrics for correlation analysis
+  advanced_operations:
+    daily_revenue:
+      source: "completed_orders"
+      group_by: "DATE(created_at)"
+      aggregate:
+        total_revenue: "SUM(total_price)"
+        order_count: "COUNT(*)"
+        avg_order_value: "AVG(total_price)"
+      sort: "DATE(created_at)"
+
+    daily_social_activity:
+      source: "recent_tweets"
+      group_by: "DATE(created_at)"
+      aggregate:
+        tweet_count: "COUNT(*)"
+        total_likes: "SUM(public_metrics.like_count)"
+        total_retweets: "SUM(public_metrics.retweet_count)"
+        avg_engagement: "AVG(public_metrics.like_count + public_metrics.retweet_count)"
+      sort: "DATE(created_at)"
+
+ai_interface:
+  model:
+    type: rest
+    url: "https://api.openai.com/v1/chat/completions"
+    method: POST
+    headers:
+      Authorization: "Bearer ${OPENAI_API_KEY}"
+      Content-Type: "application/json"
+    options:
+      model: "gpt-4"
+      temperature: 0.3
+      max_tokens: 2500
+
+  default_context:
+    company: "${COMPANY_NAME}"
+    analysis_date: "2024-01-15"
+
+  prompts:
+    reputation_analysis:
+      system: "You are a business intelligence analyst specializing in brand reputation and revenue correlation analysis."
+      user_template: |
+        # Brand Reputation Revenue Analysis for {{ company }}
+
+        ## Data Overview
+        - Twitter Mentions: {{ recent_tweets|length if recent_tweets is defined else 0 }} records
+        - Google Reviews: {{ google_reviews|length if google_reviews is defined else 0 }} records
+        - Shopify Orders: {{ completed_orders|length if completed_orders is defined else 0 }} records
+
+        ## Daily Revenue Performance
+        {% if daily_revenue is defined %}
+        {% for day in daily_revenue %}
+        **{{ day.date }}**: ${{ day.total_revenue }} revenue, {{ day.order_count }} orders, ${{ day.avg_order_value }} AOV
+        {% endfor %}
+        {% else %}
+        Revenue data aggregation in progress...
+        {% endif %}
+
+        ## Social Media Activity
+        {% if daily_social_activity is defined %}
+        {% for day in daily_social_activity %}
+        **{{ day.date }}**: {{ day.tweet_count }} tweets, {{ day.total_likes }} likes, {{ day.total_retweets }} retweets
+        {% endfor %}
+        {% else %}
+        Social media aggregation in progress...
+        {% endif %}
+
+        ## Revenue Statistics Summary
+        {% if completed_orders_summary is defined %}
+        {{ completed_orders_summary }}
+        {% else %}
+        Revenue statistics will be calculated from order data.
+        {% endif %}
+
+        ## Positive Customer Feedback
+        {% if positive_reviews is defined %}
+        Positive Reviews: {{ positive_reviews|length }}
+        {% for review in positive_reviews[:5] %}
+        - {{ review.rating }}/5: "{{ review.text[:150] }}..." - {{ review.author_name }}
+        {% endfor %}
+        {% else %}
+        Positive review analysis pending data processing.
+        {% endif %}
+
+        ## Negative Customer Feedback (Risk Analysis)
+        {% if negative_reviews is defined %}
+        Negative Reviews: {{ negative_reviews|length }}
+        {% for review in negative_reviews[:5] %}
+        - {{ review.rating }}/5: "{{ review.text[:150] }}..." - {{ review.author_name }}
+        {% endfor %}
+        {% else %}
+        Negative review analysis pending data processing.
+        {% endif %}
+
+        ## Recent Twitter Activity Sample
+        {% if recent_tweets is defined %}
+        {% for tweet in recent_tweets[:5] %}
+        - "{{ tweet.text[:100] }}..." ({{ tweet.public_metrics.like_count }} likes, {{ tweet.public_metrics.retweet_count }} retweets)
+        {% endfor %}
+        {% else %}
+        Twitter activity analysis pending data processing.
+        {% endif %}
+
+        Provide analysis covering:
+        1. Correlation between social activity and revenue
+        2. Impact of positive vs negative reviews on business
+        3. Revenue risk assessment from negative feedback
+        4. Opportunities to leverage positive sentiment
+        5. Specific action items for reputation management
+
+      response_format: "text"
+
+output:
+  type: file
+  path: "output/reputation-revenue-analysis.json"
+  format: json
