@@ -57,6 +57,23 @@ Discover complete, tested configurations that integrate multiple data sources, p
 
 ---
 
+### [🛡️ Brand Reputation Revenue Analytics](/brand-reputation-analytics)
+**Connect brand reputation directly to revenue impact**
+
+- **Data Sources**: Twitter API + Google Reviews + Shopify sales data
+- **AI Processing**: Sentiment analysis with revenue correlation insights
+- **Use Cases**: Brand management, crisis prevention, competitive intelligence
+- **Setup Time**: 15 minutes with API keys
+- **Complexity**: Intermediate
+
+**Key Features:**
+- Real-time reputation monitoring across platforms
+- Revenue impact correlation analysis
+- Crisis prediction and early warning systems
+- Competitor reputation intelligence
+
+---
+
 ## 🎯 Why Use These Configurations?
 
 ### **Production-Ready Code**
@@ -108,6 +125,7 @@ Use our [Claude Code Integration](/claude-code-integration) to automatically gen
 
 ### **Marketing & Analytics**
 - Social media demographics analysis
+- Brand reputation revenue analytics
 - Customer behavior tracking
 - Campaign performance optimization
 - Market research automation
