@@ -58,6 +58,12 @@ ai_interface:
 output:
   type: file
   path: strategic_insights.md`}
+            <Link
+              className={styles.playButton}
+              to="/docs/claude-code-integration"
+              target="_blank"
+              rel="noopener noreferrer"
+            />
           </pre>
         </div>
       </div>
@@ -107,11 +113,10 @@ function ClaudeCodeSection(): ReactNode {
               <div className={styles.claudeStep}>
                 <h3>1. Just Tell Claude What You Want</h3>
                 <div className={styles.chatBubble}>
-                  "Analyze my customer CSV and create a pipeline that filters active users over 25, 
+                  "Analyze my customer CSV and create a pipeline that filters active users over 25,
                   then generates AI insights about their behavior patterns"
                 </div>
               </div>
-              <div className={styles.arrow}>→</div>
               <div className={styles.claudeStep}>
                 <h3>2. Claude Introspects Your Data</h3>
                 <div className={styles.introspectionBox}>
@@ -124,7 +129,6 @@ function ClaudeCodeSection(): ReactNode {
                   </ul>
                 </div>
               </div>
-              <div className={styles.arrow}>→</div>
               <div className={styles.claudeStep}>
                 <h3>3. Complete Config Generated</h3>
                 <div className={styles.generatedConfig}>
@@ -149,6 +153,8 @@ output:
                 </div>
               </div>
             </div>
+
+
             <div className={styles.claudeFeatures}>
               <div className={styles.feature}>
                 <h4>🔍 Smart Data Introspection</h4>

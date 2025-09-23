@@ -29,6 +29,7 @@
   max-width: 600px;
   margin: 0 auto;
   text-align: left;
+  position: relative;
 }
 
 .codePreview {
@@ -41,6 +42,60 @@
   overflow-x: auto;
   color: #f8f8f2;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.codePreview:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.playButton {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--ifm-color-primary), var(--ifm-color-primary-light));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(46, 133, 85, 0.3);
+  text-decoration: none;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.codePreview:hover .playButton {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.playButton::before {
+  content: '▶';
+  color: white;
+  font-size: 16px;
+  margin-left: 2px;
+  transition: all 0.3s ease;
+}
+
+.playButton:hover {
+  width: 120px;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(46, 133, 85, 0.4);
+}
+
+.playButton:hover::before {
+  content: '▶ Try it now';
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 0;
 }
 
 /* Claude Code Section */
@@ -69,7 +124,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  gap: 1rem;
+  gap: 2.5rem;
   margin-bottom: 3rem;
   flex-wrap: wrap;
 }
@@ -80,11 +135,17 @@
   max-width: 320px;
 }
 
+.claudeStep:nth-child(3) {
+  max-width: 400px;
+  flex: 1.3;
+}
+
 .claudeStep h3 {
   font-size: 1rem;
   margin-bottom: 1rem;
   color: var(--ifm-color-primary);
   font-weight: 600;
+  text-align: center;
 }
 
 .chatBubble {
@@ -95,7 +156,8 @@
   border-bottom-left-radius: 4px;
   font-style: italic;
   box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
-  margin-bottom: 1rem;
+  line-height: 1.5;
+  font-size: 1.3rem;
 }
 
 .introspectionBox {
@@ -107,23 +169,44 @@
   box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
 }
 
+.introspectionBox strong {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: 1.15rem;
+}
+
 .introspectionBox ul {
-  margin: 1rem 0 0 0;
+  margin: 0;
   padding-left: 0;
   list-style: none;
 }
 
 .introspectionBox li {
-  margin: 0.5rem 0;
-  font-size: 0.9rem;
+  margin: 0.6rem 0;
+  font-size: 1.1rem;
+  line-height: 1.4;
 }
 
 .generatedConfig {
   background: #1e1e1e !important;
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 0.5rem 1rem 1rem 0.5rem;
   text-align: left;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.generatedConfig::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 50px;
+  background: linear-gradient(to left, #1e1e1e 0%, #1e1e1e 30%, rgba(30, 30, 30, 0.8) 70%, transparent 100%);
+  pointer-events: none;
+  border-radius: 0 12px 12px 0;
+  z-index: 1;
 }
 
 .generatedConfig pre {
@@ -131,17 +214,9 @@
   color: #f8f8f2 !important;
   font-size: 0.8rem;
   line-height: 1.4;
-  overflow-x: auto;
   background: transparent !important;
 }
 
-.arrow {
-  font-size: 2rem;
-  color: var(--ifm-color-primary);
-  font-weight: bold;
-  align-self: center;
-  margin: 0 1rem;
-}
 
 .claudeFeatures {
   display: grid;
@@ -181,26 +256,27 @@
   color: var(--ifm-color-emphasis-600);
 }
 
+
 /* Mobile Responsive for Claude Section */
 @media screen and (max-width: 768px) {
   .claudeCode {
     padding: 3rem 0;
   }
-  
+
   .claudeCode h2 {
     font-size: 2rem;
   }
-  
+
   .claudeDemo {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .arrow {
     transform: rotate(90deg);
     margin: 1rem 0;
   }
-  
+
   .claudeStep {
     width: 100%;
     max-width: 100%;

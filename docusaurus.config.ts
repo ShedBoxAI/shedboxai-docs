@@ -7,7 +7,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'ShedBoxAI',
   tagline: 'Lightweight AI-powered data processing framework',
-  favicon: 'img/logo_without_text.png',
+  favicon: 'img/favicon.png',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -196,14 +196,14 @@ const config: Config = {
   ],
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/logo.png',
+    image: 'img/logo_with_text.png',
     metadata: [
     {name: 'description', content: 'ShedBoxAI — Lightweight AI-powered data processing framework. Official website & documentation.'},
     {name: 'keywords', content: 'shedboxai, shed box ai, ai framework, data processing, open source ai, ai pipeline'},
     {property: 'og:title', content: 'ShedBoxAI — Official Site'},
     {property: 'og:description', content: 'Lightweight AI-powered data processing framework. Official docs, blog & community.'},
     {property: 'og:url', content: 'https://shedboxai.com'},
-    {property: 'og:image', content: 'https://shedboxai.com/img/logo.png'},
+    {property: 'og:image', content: 'https://shedboxai.com/img/logo_with_text.png'},
     {property: 'twitter:card', content: 'summary_large_image'},
     {property: 'twitter:site', content: '@ShedboxAI'}
   ],
@@ -233,7 +233,10 @@ const config: Config = {
       title: 'ShedBoxAI',
       logo: {
         alt: 'ShedBoxAI Logo',
-        src: 'img/logo_without_text.png',
+        src: 'img/logo_without_text_new.png',
+        srcDark: 'img/logo_without_text_new.png',
+        width: 40,
+        height: 40,
       },
       items: [
         {
@@ -292,7 +295,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} ShedBoxAI. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} ShedBoxAI.`,
     },
     prism: {
       theme: prismThemes.github,

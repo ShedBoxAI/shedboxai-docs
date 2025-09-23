@@ -7,6 +7,16 @@
 /* Import LeagueSpartan font */
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+/* Local League Spartan font fallback */
+@font-face {
+  font-family: 'League Spartan';
+  src: url('/fonts/league-spartan.bold.otf') format('opentype'),
+       url('/fonts/league-spartan.bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* You can override the default Infima variables here. */
 :root {
   --ifm-color-primary: #2e8555;
@@ -20,6 +30,26 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --ifm-font-family-base: 'League Spartan', sans-serif;
   --ifm-heading-font-family: 'League Spartan', sans-serif;
+
+  /* Typography improvements for better readability */
+  --ifm-font-size-base: 15px; /* Slightly smaller base font size */
+  --ifm-line-height-base: 1.7; /* Increased line height for better spacing */
+  --ifm-paragraph-margin-bottom: 1.5rem; /* More space between paragraphs */
+
+  /* Heading spacing improvements */
+  --ifm-heading-margin-top: 2rem;
+  --ifm-heading-margin-bottom: 1rem;
+  --ifm-h1-font-size: 2.2rem;
+  --ifm-h2-font-size: 1.8rem;
+  --ifm-h3-font-size: 1.4rem;
+  --ifm-h4-font-size: 1.2rem;
+  --ifm-h5-font-size: 1.1rem;
+  --ifm-h6-font-size: 1rem;
+
+  /* Container and content spacing */
+  --ifm-container-width-xl: 1200px;
+  --ifm-spacing-horizontal: 1.5rem;
+  --ifm-spacing-vertical: 1.5rem;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -32,4 +62,124 @@
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Additional typography and spacing improvements */
+
+/* Improve content area spacing - but not for homepage */
+.main-wrapper:not(.docs-wrapper):not(.blog-wrapper) {
+  padding-top: 0;
+}
+
+.docs-wrapper .main-wrapper,
+.blog-wrapper .main-wrapper {
+  padding-top: 2rem;
+}
+
+/* Better spacing for markdown content */
+.markdown > * {
+  margin-bottom: 1.25rem;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.markdown h1:first-child,
+.markdown h2:first-child,
+.markdown h3:first-child {
+  margin-top: 0;
+}
+
+/* Improve list spacing */
+.markdown ul,
+.markdown ol {
+  margin-bottom: 1.5rem;
+}
+
+.markdown li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+/* Better spacing for code blocks */
+.markdown pre {
+  margin: 1.5rem 0;
+}
+
+/* Improve table spacing */
+.markdown table {
+  margin: 1.5rem 0;
+}
+
+.markdown td,
+.markdown th {
+  padding: 0.75rem 1rem;
+}
+
+/* Blog post spacing improvements */
+.blog-wrapper article {
+  margin-bottom: 3rem;
+}
+
+/* Constrain only the blog content, not the entire blog wrapper */
+.blog-wrapper .container {
+  max-width: 800px;
+}
+
+.blog-wrapper .margin-vert--lg {
+  margin-bottom: 3rem;
+}
+
+/* Fix blog heading sizes */
+.blog-wrapper h1 {
+  font-size: 1.8rem;
+}
+
+.blog-wrapper h2 {
+  font-size: 1.5rem;
+}
+
+.blog-wrapper h3 {
+  font-size: 1.3rem;
+}
+
+.blog-wrapper h4 {
+  font-size: 1.1rem;
+}
+
+.blog-wrapper h5,
+.blog-wrapper h6 {
+  font-size: 1rem;
+}
+
+/* Card spacing improvements */
+.card {
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+}
+
+/* Navbar spacing and logo alignment */
+.navbar {
+  padding: 1rem 0;
+}
+
+.navbar__brand {
+  align-items: center;
+}
+
+.navbar__logo img {
+  vertical-align: middle;
+  transform: translateY(-4px);
+}
+
+/* Footer spacing */
+.footer {
+  padding: 2rem 0;
 }
