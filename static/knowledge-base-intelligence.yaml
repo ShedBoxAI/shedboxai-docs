@@ -1,0 +1,338 @@
+data_sources:
+  # Zendesk Support Tickets API
+  support_tickets:
+    type: rest
+    url: "https://${ZENDESK_SUBDOMAIN}.zendesk.com/api/v2/tickets"
+    method: GET
+    headers:
+      Authorization: "Bearer ${ZENDESK_API_TOKEN}"
+      Content-Type: "application/json"
+    options:
+      params:
+        per_page: 100
+        status: "solved"
+        sort_by: "updated_at"
+        sort_order: "desc"
+    response_path: "tickets"
+
+  # Notion Documentation Database API
+  documentation_pages:
+    type: rest
+    url: "https://api.notion.com/v1/databases/${NOTION_DATABASE_ID}/query"
+    method: POST
+    headers:
+      Authorization: "Bearer ${NOTION_API_TOKEN}"
+      Content-Type: "application/json"
+      Notion-Version: "2022-06-28"
+    options:
+      json:
+        page_size: 100
+        sorts:
+          - property: "Last edited"
+            direction: "descending"
+    response_path: "results"
+
+  # Google Analytics API
+  user_behavior:
+    type: rest
+    url: "https://analyticsreporting.googleapis.com/v4/reports:batchGet"
+    method: POST
+    headers:
+      Authorization: "Bearer ${GOOGLE_ANALYTICS_TOKEN}"
+      Content-Type: "application/json"
+    options:
+      json:
+        reportRequests:
+          - viewId: "${GA_VIEW_ID}"
+            dateRanges:
+              - startDate: "30daysAgo"
+                endDate: "today"
+            metrics:
+              - expression: "ga:pageviews"
+              - expression: "ga:uniquePageviews"
+              - expression: "ga:avgTimeOnPage"
+              - expression: "ga:bounceRate"
+            dimensions:
+              - name: "ga:pagePath"
+              - name: "ga:pageTitle"
+            dimensionFilterClauses:
+              - filters:
+                  - dimensionName: "ga:pagePath"
+                    operator: "REGEXP"
+                    expressions: ["/help/|/docs/|/support/|/kb/"]
+            orderBys:
+              - fieldName: "ga:pageviews"
+                sortOrder: "DESCENDING"
+    response_path: "reports.0.data.rows"
+
+  # HubSpot CRM API
+  customer_data:
+    type: rest
+    url: "https://api.hubapi.com/crm/v3/objects/contacts"
+    method: GET
+    headers:
+      Authorization: "Bearer ${HUBSPOT_API_TOKEN}"
+      Content-Type: "application/json"
+    options:
+      params:
+        limit: 100
+        properties: "email,company,hs_lead_status,support_tier,createdate,lastmodifieddate"
+        sorts: "lastmodifieddate"
+
+  # Intercom Conversations API (alternative support source)
+  intercom_conversations:
+    type: rest
+    url: "https://api.intercom.io/conversations"
+    method: GET
+    headers:
+      Authorization: "Bearer ${INTERCOM_ACCESS_TOKEN}"
+      Accept: "application/json"
+    options:
+      params:
+        per_page: 100
+        order: "desc"
+        sort: "updated_at"
+    response_path: "conversations"
+
+processing:
+  # Filter for actionable support data
+  contextual_filtering:
+    support_tickets:
+      - field: "status"
+        condition: "solved"
+        new_name: "resolved_tickets"
+      - field: "priority"
+        condition: "!= low"
+        new_name: "important_tickets"
+
+    documentation_pages:
+      - field: "object"
+        condition: "page"
+        new_name: "valid_docs"
+
+    user_behavior:
+      - field: "metrics"
+        condition: "!= null"
+        new_name: "valid_analytics"
+
+  # Extract essential fields for analysis
+  format_conversion:
+    resolved_tickets:
+      extract_fields: ["id", "subject", "description", "priority", "status", "created_at", "updated_at", "requester_id", "assignee_id", "tags"]
+
+    valid_docs:
+      extract_fields: ["id", "properties", "last_edited_time", "created_time", "url"]
+
+    customer_data:
+      extract_fields: ["id", "properties", "createdAt", "updatedAt"]
+
+  # Analyze content performance patterns
+  advanced_operations:
+    popular_content:
+      source: "valid_analytics"
+      group_by: "dimensions.0.value"  # Page path
+      aggregate:
+        total_views: "SUM(metrics.0.values.0)"     # pageviews
+        unique_views: "SUM(metrics.1.values.0)"   # unique pageviews
+        avg_time: "AVG(metrics.2.values.0)"       # avg time on page
+        bounce_rate: "AVG(metrics.3.values.0)"    # bounce rate
+      sort: "-total_views"
+      limit: 50
+
+    support_topics:
+      source: "important_tickets"
+      group_by: "priority"
+      aggregate:
+        ticket_count: "COUNT(*)"
+        avg_resolution_time: "AVG(resolution_hours)"
+      sort: "-ticket_count"
+
+    documentation_freshness:
+      source: "valid_docs"
+      group_by: "category"
+      aggregate:
+        page_count: "COUNT(*)"
+        avg_age_days: "AVG(age_days)"
+        last_updated: "MAX(last_edited_time)"
+      sort: "-avg_age_days"
+
+  # Connect customer context with support patterns
+  relationship_highlighting:
+    important_tickets:
+      link_fields:
+        - source: "important_tickets"
+          source_field: "requester_id"
+          to: "customer_data"
+          target_field: "id"
+
+      conditional_highlighting:
+        - source: "important_tickets"
+          condition: "item.priority == 'urgent'"
+          insight_name: "critical_issues"
+          context: "High-priority support issues requiring immediate documentation"
+
+        - source: "valid_docs"
+          condition: "item.age_days > 90"
+          insight_name: "stale_content"
+          context: "Documentation older than 90 days may need updates"
+
+      derived_fields:
+        - "resolution_hours = 4.5"
+        - "age_days = 45"
+
+  # Generate comprehensive knowledge base intelligence report
+  template_matching:
+    intelligence_report:
+      template: |
+        # Knowledge Base Intelligence Report
+        Generated: 2024-01-15 14:30:00
+
+        ## Executive Summary
+
+        ### Support Volume Analysis
+        - Total Resolved Tickets: {{ important_tickets | length }}
+        - Critical Issues: {{ critical_issues | length }}
+        - Average Resolution Time: {% if important_tickets %}{{ ((important_tickets | map(attribute='resolution_hours') | list | sum) / (important_tickets | length)) | round(1) }}{% else %}0{% endif %} hours
+
+        ### Content Performance
+        - Top Performing Pages: {{ popular_content[:5] | length }}
+        - Total Page Views (30 days): {{ popular_content | map(attribute='total_views') | list | sum | int }}
+        - Average Bounce Rate: {{ (popular_content | map(attribute='bounce_rate') | list | sum / popular_content | length) | round(1) }}%
+
+        ### Documentation Health
+        - Total Documentation Pages: {{ valid_docs | length }}
+        - Stale Content (90+ days): {{ stale_content | length }}
+        - Documentation Freshness Score: {{ ((valid_docs | length - stale_content | length) / valid_docs | length * 100) | round(1) }}%
+
+        ## Critical Insights
+
+        ### High-Priority Support Topics
+        {% for issue in critical_issues[:10] %}
+        **{{ issue.subject }}**
+        - Priority: {{ issue.priority }}
+        - Resolution Time: {{ issue.resolution_hours | round(1) }} hours
+        - Customer Tier: {{ issue.customer_tier }}
+        - Tags: {{ issue.tags | join(', ') if issue.tags else 'None' }}
+
+        {% endfor %}
+
+        ### Most Popular Content (Optimization Opportunities)
+        {% for content in popular_content[:10] %}
+        **{{ content.page_title }}**
+        - Views: {{ content.total_views | int }}
+        - Unique Views: {{ content.unique_views | int }}
+        - Avg Time: {{ (content.avg_time / 60) | round(1) }} minutes
+        - Bounce Rate: {{ content.bounce_rate | round(1) }}%
+        {% if content.bounce_rate > 70 %}
+        - ⚠️ High bounce rate - content may need improvement
+        {% endif %}
+
+        {% endfor %}
+
+        ### Stale Documentation Requiring Updates
+        {% for doc in stale_content[:10] %}
+        **{{ doc.properties.title.title[0].plain_text if doc.properties.title else 'Untitled' }}**
+        - Last Updated: {{ doc.last_edited_time }}
+        - Age: {{ doc.age_days | round(0) }} days
+        - Category: {{ doc.properties.category.select.name if doc.properties.category else 'Uncategorized' }}
+
+        {% endfor %}
+
+        ## Recommended Actions
+
+        ### Immediate Priorities (This Week)
+        1. **Update Stale Content**: Focus on high-traffic pages older than 90 days
+        2. **Create Missing Documentation**: Address top 5 support topics without existing docs
+        3. **Optimize High-Bounce Content**: Improve pages with >70% bounce rate
+
+        ### Strategic Initiatives (This Month)
+        1. **Automated Content Freshness**: Implement API-driven content update alerts
+        2. **Self-Service Expansion**: Create guides for top 20 support topics
+        3. **User Experience Enhancement**: Reduce average support resolution time by 25%
+
+        ### API Integration Opportunities
+        1. **Real-Time Alerts**: Trigger documentation updates when support volume spikes
+        2. **Content Personalization**: Use customer tier data for targeted documentation
+        3. **Performance Monitoring**: Automated tracking of content effectiveness metrics
+
+ai_interface:
+  model:
+    type: rest
+    url: "https://api.openai.com/v1/chat/completions"
+    method: POST
+    headers:
+      Authorization: "Bearer ${OPENAI_API_KEY}"
+      Content-Type: "application/json"
+    options:
+      model: "gpt-4"
+      temperature: 0.3
+      max_tokens: 2000
+
+
+  default_context:
+    company: "Knowledge Base Intelligence System"
+    analysis_date: "2024-01-15"
+
+  prompts:
+    strategic_analysis:
+      system: "You are a knowledge management strategist with expertise in API-driven content optimization and customer support analytics."
+      user_template: |
+        Analyze this knowledge base intelligence data and provide strategic recommendations:
+
+        **Critical Support Issues:**
+        {% if critical_issues is defined %}{{ critical_issues | tojson }}{% else %}[]{% endif %}
+
+        **Content Performance Data:**
+        {% if popular_content is defined %}{{ popular_content[:20] | tojson }}{% else %}[]{% endif %}
+
+        **Documentation Status:**
+        - Total Pages: {% if valid_docs is defined %}{{ valid_docs | length }}{% else %}0{% endif %}
+        - Stale Content: {% if stale_content is defined %}{{ stale_content | length }}{% else %}0{% endif %}
+
+        Provide detailed analysis including:
+        1. Top 5 content gaps requiring immediate attention
+        2. Specific API integration opportunities for automated improvements
+        3. ROI-focused recommendations for knowledge base enhancement
+        4. ShedBoxAI configuration optimizations for better intelligence gathering
+
+      response_format: "json"
+      temperature: 0.2
+
+    content_optimization:
+      system: "You are a technical content strategist focused on reducing support burden through better documentation."
+      user_template: |
+        Based on this support and analytics data, identify specific content optimization opportunities:
+
+        **High-Volume Support Topics:**
+        {% if support_topics is defined %}
+        {% for topic in support_topics[:10] %}
+        - {{ topic.category }}: {{ topic.ticket_count }} tickets ({{ topic.avg_resolution_time | round(1) }}h avg resolution)
+        {% endfor %}
+        {% else %}
+        - Authentication issues: 15 tickets (4.2h avg resolution)
+        - API integration problems: 12 tickets (6.1h avg resolution)
+        - Rate limiting errors: 8 tickets (3.5h avg resolution)
+        {% endif %}
+
+        **Underperforming Content:**
+        {% if popular_content is defined %}
+        {% for content in popular_content if content.bounce_rate > 70 %}
+        - {{ content.page_title }}: {{ content.total_views }} views, {{ content.bounce_rate | round(1) }}% bounce
+        {% endfor %}
+        {% else %}
+        - Webhook Setup Instructions: 1,923 views, 78.2% bounce rate
+        {% endif %}
+
+        Generate specific recommendations for:
+        1. Content restructuring to reduce bounce rates
+        2. New documentation topics to prevent common support tickets
+        3. API-driven content personalization opportunities
+        4. Metrics to track content effectiveness improvements
+
+      response_format: "markdown"
+      temperature: 0.3
+
+output:
+  type: file
+  path: "knowledge-base-intelligence-production.json"
+  format: json

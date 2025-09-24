@@ -113,7 +113,13 @@ const config: Config = {
                   item.url.includes('/social-media-demographics') ||
                   item.url.includes('/weather-ecommerce') ||
                   item.url.includes('/economic-retail-analytics') ||
-                  item.url.includes('/brand-reputation-analytics')) {
+                  item.url.includes('/brand-reputation-analytics') ||
+                  item.url.includes('/knowledge-base-software') ||
+                  item.url.includes('/knowledge-base-problems') ||
+                  item.url.includes('/api-knowledge-base-integration') ||
+                  item.url.includes('/knowledge-base-roi-calculator') ||
+                  item.url.includes('/hubspot-knowledge-base-software') ||
+                  item.url.includes('/internal-knowledge-base-software')) {
                 return {...item, priority: 0.9, changefreq: 'weekly'};
               }
               
