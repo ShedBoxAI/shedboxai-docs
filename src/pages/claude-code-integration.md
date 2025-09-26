@@ -183,7 +183,14 @@ Claude Code understands complex data workflows:
 ### Prerequisites
 - ShedBoxAI installed (`pip install shedboxai`)
 - Claude Code access ([Get Claude Code](https://claude.ai/code))
-- Download: [AI Assistant Guide](/AI_ASSISTANT_GUIDE.txt) (Essential for AI generation)
+- **AI Assistant Guide** (Essential for AI generation):
+  ```bash
+  # Get the latest guide instantly (recommended):
+  shedboxai guide --save ai-assistant-guide.md
+
+  # Or download directly:
+  # https://shedboxai.com/AI_ASSISTANT_GUIDE.txt
+  ```
 
 ### Quick Start Process
 
@@ -271,8 +278,12 @@ Claude Code understands domain-specific requirements:
 
 ### Ready to Transform Your Data Workflows?
 
-1. **[Download AI Assistant Guide](/AI_ASSISTANT_GUIDE.txt)** - Essential for Claude Code integration
-2. **[Quick Start Tutorial](/docs/getting-started/quick-start)** - Get running in 5 minutes  
+1. **Get AI Assistant Guide** - Essential for Claude Code integration:
+   ```bash
+   shedboxai guide --save ai-assistant-guide.md
+   ```
+   Or [download directly](/AI_ASSISTANT_GUIDE.txt)
+2. **[Quick Start Tutorial](/docs/getting-started/quick-start)** - Get running in 5 minutes
 3. **[Claude Code Integration Docs](/docs/claude-code-integration)** - Complete technical guide
 4. **[Join Community](/community)** - Share experiences with other users
 
@@ -287,7 +298,7 @@ Claude Code understands domain-specific requirements:
 :::tip Start Your AI-Powered Data Journey Today
 **The future of data processing is here.** Join the AI-first data revolution with ShedBoxAI and Claude Code.
 
-[Get Started Now](/docs/getting-started/installation) • [View Examples](/docs/examples) • [Download AI Guide](/AI_ASSISTANT_GUIDE.txt)
+[Get Started Now](/docs/getting-started/installation) • [View Examples](/docs/examples) • [Get AI Guide](#prerequisites)
 :::
 
 ---

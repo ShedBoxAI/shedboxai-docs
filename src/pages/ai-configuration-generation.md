@@ -317,11 +317,19 @@ output:
 pip install shedboxai
 ```
 
-### Step 2: Download AI Assistant Guide
+### Step 2: Get AI Assistant Guide
 **Essential for AI generation:**
-- [Download AI Assistant Guide](/AI_ASSISTANT_GUIDE.txt)
-- Contains all syntax patterns and examples for AI
-- Required for Claude Code integration
+```bash
+# Get the latest guide with enhanced features (recommended):
+shedboxai guide --save ai-assistant-guide.md
+
+# Or download directly: https://shedboxai.com/AI_ASSISTANT_GUIDE.txt
+```
+**What's new in the guide:**
+- Variable Lifecycle understanding
+- Defensive Template Patterns
+- Start Simple Workflow
+- Data Format Reference
 
 ### Step 3: Describe Your Requirements
 Instead of writing YAML, just describe what you need:
@@ -410,9 +418,13 @@ Instead of writing YAML, just describe what you need:
 ## Ready to Experience AI Configuration Generation?
 
 ### Get Started Today
-1. **[Download AI Assistant Guide](/AI_ASSISTANT_GUIDE.txt)** - Essential for AI integration
+1. **Get AI Assistant Guide** - Essential for AI integration:
+   ```bash
+   shedboxai guide --save ai-assistant-guide.md
+   ```
+   Or [download directly](/AI_ASSISTANT_GUIDE.txt)
 2. **[Quick Start Tutorial](/docs/getting-started/quick-start)** - Your first AI-generated pipeline
-3. **[Claude Code Integration](/docs/claude-code-integration)** - Complete AI setup guide  
+3. **[Claude Code Integration](/docs/claude-code-integration)** - Complete AI setup guide
 4. **[Join Community](/community)** - Share AI configuration experiences
 
 ### Enterprise Solutions
@@ -426,7 +438,7 @@ Instead of writing YAML, just describe what you need:
 :::tip The AI Revolution in Data Processing Has Begun  
 **Stop writing configurations manually.** Let AI generate perfect data pipelines in minutes, not hours.
 
-[Start Your AI Journey](/docs/getting-started/installation) • [See Examples](/docs/examples) • [Get AI Guide](/AI_ASSISTANT_GUIDE.txt)
+[Start Your AI Journey](/docs/getting-started/installation) • [See Examples](/docs/examples) • [Get AI Guide](#step-2-get-ai-assistant-guide)
 :::
 
 ---

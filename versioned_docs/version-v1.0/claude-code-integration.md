@@ -10,7 +10,14 @@ Transform **2-4 hours of manual YAML writing** into **5-10 minutes** with Claude
 :::
 
 :::danger Essential Resource Required
-**Download the [AI Assistant Guide](/AI_ASSISTANT_GUIDE.txt)** - This mandatory document must be provided to your LLM of choice. It contains the complete configuration syntax, operation patterns, and examples needed to generate accurate ShedBoxAI configurations.
+**Get the AI Assistant Guide** - This mandatory document must be provided to your LLM of choice:
+```bash
+# Get the latest guide with enhanced features (recommended):
+shedboxai guide --save ai-assistant-guide.md
+
+# Or download directly: /AI_ASSISTANT_GUIDE.txt
+```
+The guide contains complete configuration syntax, operation patterns, examples, and new features like Variable Lifecycle, Defensive Template Patterns, and Data Flow understanding.
 :::
 
 ## Why This Changes Everything
@@ -171,8 +178,16 @@ processing:
 
 ### Step 3: Generate Configuration with Claude Code
 
-Now comes the magic! First, provide Claude Code with both essential documents:
-1. The [AI Assistant Guide](/AI_ASSISTANT_GUIDE.txt) 
+Now comes the magic! First, get the essential AI Assistant Guide:
+```bash
+# Get the latest enhanced guide:
+shedboxai guide --save ai-assistant-guide.md
+
+# Or download: /AI_ASSISTANT_GUIDE.txt
+```
+
+Then provide Claude Code with both essential documents:
+1. The AI Assistant Guide (ai-assistant-guide.md)
 2. Your introspection report (`analysis.md`)
 
 Then use this prompt:
@@ -529,7 +544,11 @@ ai_interface:
 ## Next Steps
 
 ### Continue Learning
-- **[AI Assistant Guide](/AI_ASSISTANT_GUIDE.txt)** - Complete LLM cheatsheet for ShedBoxAI configuration generation
+- **AI Assistant Guide** - Complete LLM cheatsheet for ShedBoxAI configuration generation:
+  ```bash
+  shedboxai guide --save ai-assistant-guide.md
+  ```
+  Or [download directly](/AI_ASSISTANT_GUIDE.txt)
 - **[Getting Started Guide](./getting-started/installation.md)** - Complete installation and setup
 - **[Operations Reference](./operations/index.md)** - Understanding all available operations
 - **[Configuration Guide](./configuration/data-sources.md)** - Advanced data source configuration

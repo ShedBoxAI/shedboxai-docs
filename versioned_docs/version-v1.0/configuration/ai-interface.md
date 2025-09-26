@@ -9,8 +9,17 @@ The AI interface enables:
 - **Batch Processing**: Process multiple prompts efficiently
 - **Parallel Execution**: Concurrent API calls for performance
 - **Prompt Storage**: Save prompts and responses for analysis
-- **Advanced Templating**: Jinja2 templates with custom filters
+- **Advanced Templating**: Jinja2 templates with custom filters and variable lifecycle understanding
 - **Error Handling**: Retry logic and rate limit management
+- **Defensive Patterns**: Built-in template safety and fallback strategies
+
+:::tip AI Configuration Guide
+For LLM-assisted configuration generation, get the comprehensive AI Assistant Guide:
+```bash
+shedboxai guide --save ai-assistant-guide.md
+```
+Contains variable lifecycle patterns, defensive templates, and data flow examples.
+:::
 
 ## Basic Configuration
 
@@ -327,6 +336,83 @@ ai_interface:
 ### Note on Filters
 
 Use the actual implemented filters: `tojson`, `length`, `join`, plus standard Jinja2 filters like `upper`, `lower`, `default`, etc.
+
+## Variable Lifecycle & Defensive Patterns
+
+### Understanding Variable Availability
+
+Variables become available at different stages of processing:
+
+```yaml
+ai_interface:
+  prompts:
+    data_flow_example:
+      user_template: |
+        # Initial data sources (always available):
+        Original users: {{ users|length }}
+
+        # After contextual_filtering with new_name:
+        {% if adult_users is defined %}
+        Adult users: {{ adult_users|length }}
+        {% endif %}
+
+        # After content_summarization (adds "_summary"):
+        {% if adult_users_summary is defined %}
+        Average age: {{ adult_users_summary.age_mean }}
+        {% endif %}
+
+        # After advanced_operations (operation name):
+        {% if spending_analysis is defined %}
+        Top spender city: {{ spending_analysis[0].city }}
+        {% endif %}
+```
+
+### Defensive Template Patterns
+
+Always use defensive checks for reliable templates:
+
+```yaml
+ai_interface:
+  prompts:
+    safe_analysis:
+      user_template: |
+        # Check if data exists before using
+        {% if revenue_data is defined and revenue_data %}
+          Total Revenue: ${{ revenue_data.total|default(0) }}
+
+          {% if revenue_data.breakdown is defined %}
+          Top Categories:
+          {% for category in revenue_data.breakdown[:3] %}
+          - {{ category.name }}: ${{ category.amount }}
+          {% endfor %}
+          {% else %}
+          Revenue breakdown unavailable
+          {% endif %}
+        {% else %}
+          No revenue data available for analysis
+        {% endif %}
+
+        # Safe access with fallbacks
+        Customer Count: {{ customer_stats.total_customers|default("Unknown") }}
+```
+
+### Template Debugging
+
+Debug templates by inspecting available variables:
+
+```yaml
+ai_interface:
+  prompts:
+    debug_template:
+      user_template: |
+        Available Variables:
+        {% for key, value in globals().items() if not key.startswith('_') %}
+        - {{ key }}: {{ value.__class__.__name__ }}
+          {% if value is iterable and value is not string and value is not mapping %}
+            ({{ value|length }} items)
+          {% endif %}
+        {% endfor %}
+```
 
 ## Multi-Provider Support
 
