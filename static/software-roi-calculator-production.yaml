@@ -1,0 +1,356 @@
+# Software ROI Calculator - Production Configuration
+# Calculates ROI for business software investments by correlating costs with revenue impact
+# Replace with your actual API credentials
+
+data_sources:
+  # Salesforce API - CRM revenue and deal data
+  salesforce_opportunities:
+    type: rest
+    url: "https://${SALESFORCE_INSTANCE}.my.salesforce.com/services/data/v58.0/query"
+    headers:
+      Authorization: "Bearer ${SALESFORCE_ACCESS_TOKEN}"
+      Content-Type: "application/json"
+    options:
+      params:
+        q: "SELECT Id, Name, Amount, CloseDate, StageName, CreatedDate, LastModifiedDate FROM Opportunity WHERE CloseDate >= LAST_N_MONTHS:6 AND IsWon = true"
+    response_path: "records"
+
+  # QuickBooks Online API - Software subscription expenses
+  quickbooks_expenses:
+    type: rest
+    url: "https://quickbooks.api.intuit.com/v3/company/${QUICKBOOKS_COMPANY_ID}/query"
+    headers:
+      Authorization: "Bearer ${QUICKBOOKS_ACCESS_TOKEN}"
+      Accept: "application/json"
+    options:
+      params:
+        query: "SELECT * FROM Purchase WHERE TxnDate >= '2024-01-01' AND DetailType = 'ExpenseLineDetail' AND EntityRef.name LIKE '%software%' OR EntityRef.name LIKE '%subscription%' MAXRESULTS 1000"
+        minorversion: 65
+    response_path: "QueryResponse.Purchase"
+
+  # HubSpot API - CRM activity and deal metrics
+  hubspot_deals:
+    type: rest
+    url: "https://api.hubapi.com/crm/v3/objects/deals/search"
+    method: POST
+    headers:
+      Authorization: "Bearer ${HUBSPOT_ACCESS_TOKEN}"
+      Content-Type: "application/json"
+    options:
+      body:
+        filterGroups:
+          - filters:
+              - propertyName: "closedate"
+                operator: "GTE"
+                value: "2024-01-01"
+              - propertyName: "dealstage"
+                operator: "EQ"
+                value: "closedwon"
+        properties:
+          - "dealname"
+          - "amount"
+          - "closedate"
+          - "createdate"
+          - "hs_lastmodifieddate"
+        limit: 100
+    response_path: "results"
+
+  # Stripe API - Payment revenue data
+  stripe_charges:
+    type: rest
+    url: "https://api.stripe.com/v1/charges"
+    headers:
+      Authorization: "Bearer ${STRIPE_SECRET_KEY}"
+    options:
+      params:
+        limit: 100
+        created[gte]: "1704067200"  # Jan 1, 2024 timestamp
+        expand[]: "data.customer"
+        expand[]: "data.invoice"
+    response_path: "data"
+
+  # Xero Accounting API - Alternative accounting data source
+  xero_invoices:
+    type: rest
+    url: "https://api.xero.com/api.xro/2.0/Invoices"
+    headers:
+      Authorization: "Bearer ${XERO_ACCESS_TOKEN}"
+      Accept: "application/json"
+      xero-tenant-id: "${XERO_TENANT_ID}"
+    options:
+      params:
+        where: "Type=='ACCREC' AND Status=='PAID' AND Date>=DateTime(2024,01,01)"
+        order: "Date DESC"
+    response_path: "Invoices"
+
+processing:
+  # Filter data - Note: ShedBoxAI bug requires only ONE filter per source
+  contextual_filtering:
+    quickbooks_expenses:
+      - field: "Id"
+        condition: "!= null"
+        new_name: "software_costs"
+
+    salesforce_opportunities:
+      - field: "StageName"
+        condition: "Closed Won"
+        new_name: "won_deals"
+
+    hubspot_deals:
+      - field: "id"
+        condition: "!= null"
+        new_name: "closed_deals"
+
+    stripe_charges:
+      - field: "status"
+        condition: "succeeded"
+        new_name: "successful_payments"
+
+    xero_invoices:
+      - field: "Status"
+        condition: "PAID"
+        new_name: "paid_invoices"
+
+  # Calculate aggregate metrics using original field names
+  content_summarization:
+    software_costs:
+      method: "statistical"
+      fields: ["TotalAmt"]
+      summarize: ["sum", "mean", "count", "max", "min"]
+
+    won_deals:
+      method: "statistical"
+      fields: ["Amount"]
+      summarize: ["sum", "mean", "count", "max", "min", "std"]
+
+    successful_payments:
+      method: "statistical"
+      fields: ["amount"]
+      summarize: ["sum", "count", "mean"]
+
+    paid_invoices:
+      method: "statistical"
+      fields: ["Total"]
+      summarize: ["sum", "mean", "count", "max", "min"]
+
+  # Advanced aggregations for ROI analysis using original field names
+  advanced_operations:
+    # Monthly software costs
+    monthly_costs:
+      source: "software_costs"
+      group_by: "DATE_TRUNC('month', TxnDate)"
+      aggregate:
+        total_cost: "SUM(TotalAmt)"
+        expense_count: "COUNT(*)"
+        avg_cost_per_tool: "AVG(TotalAmt)"
+      sort: "DATE_TRUNC('month', TxnDate)"
+
+    # Monthly revenue from CRM
+    monthly_revenue:
+      source: "won_deals"
+      group_by: "DATE_TRUNC('month', CloseDate)"
+      aggregate:
+        total_revenue: "SUM(Amount)"
+        deal_count: "COUNT(*)"
+        avg_deal_size: "AVG(Amount)"
+      sort: "DATE_TRUNC('month', CloseDate)"
+
+    # Payment method revenue
+    payment_revenue:
+      source: "successful_payments"
+      transform:
+        revenue_dollars: "amount / 100"
+      group_by: "DATE_TRUNC('month', TIMESTAMP 'epoch' + created * INTERVAL '1 second')"
+      aggregate:
+        total_revenue: "SUM(revenue_dollars)"
+        payment_count: "COUNT(*)"
+        avg_transaction: "AVG(revenue_dollars)"
+      sort: "DATE_TRUNC('month', TIMESTAMP 'epoch' + created * INTERVAL '1 second')"
+
+ai_interface:
+  model:
+    type: rest
+    url: "https://api.openai.com/v1/chat/completions"
+    method: POST
+    headers:
+      Authorization: "Bearer ${OPENAI_API_KEY}"
+      Content-Type: "application/json"
+    options:
+      model: "gpt-4"
+      temperature: 0.3
+      max_tokens: 3000
+
+  default_context:
+    company: "${COMPANY_NAME}"
+    analysis_period: "Last 6 months"
+    analysis_date: "2024-09-30"
+
+  prompts:
+    roi_analysis:
+      system: "You are a financial analyst specializing in software ROI calculation and cost-benefit analysis. Provide clear, actionable insights backed by data."
+      user_template: |
+        # Software ROI Analysis for {{ company }}
+        **Analysis Period**: {{ analysis_period }}
+        **Generated**: {{ analysis_date }}
+
+        ## Executive Summary
+
+        ### Software Investment Overview
+        {% if software_costs_summary is defined %}
+        ```json
+        {{ software_costs_summary | tojson }}
+        ```
+        {% else %}
+        Software cost data processing...
+        {% endif %}
+
+        ### Revenue Performance
+        {% if won_deals_summary is defined %}
+        ```json
+        {{ won_deals_summary | tojson }}
+        ```
+        {% else %}
+        Revenue data processing...
+        {% endif %}
+
+        {% if successful_payments_summary is defined %}
+        **Payment Processing**:
+        ```json
+        {{ successful_payments_summary | tojson }}
+        ```
+        {% else %}
+        Payment data processing...
+        {% endif %}
+
+        {% if paid_invoices_summary is defined %}
+        **Xero Invoices Summary**:
+        ```json
+        {{ paid_invoices_summary | tojson }}
+        ```
+        {% else %}
+        Invoice data processing...
+        {% endif %}
+
+        ## Monthly Cost Analysis
+        {% if monthly_costs is defined and monthly_costs %}
+        | Month | Total Cost | Expense Count | Avg Cost/Tool |
+        |-------|-----------|---------------|---------------|
+        {% for month in monthly_costs %}
+        | {{ month.month }} | ${{ month.total_cost|round(2) }} | {{ month.expense_count }} | ${{ month.avg_cost_per_tool|round(2) }} |
+        {% endfor %}
+        {% else %}
+        Monthly cost aggregation in progress...
+        {% endif %}
+
+        ## Monthly Revenue Performance
+        {% if monthly_revenue is defined and monthly_revenue %}
+        | Month | Total Revenue | Deals Closed | Avg Deal Size |
+        |-------|--------------|--------------|---------------|
+        {% for month in monthly_revenue %}
+        | {{ month.month }} | ${{ month.total_revenue|round(2) }} | {{ month.deal_count }} | ${{ month.avg_deal_size|round(2) }} |
+        {% endfor %}
+        {% else %}
+        Monthly revenue aggregation in progress...
+        {% endif %}
+
+        ## Payment Revenue Breakdown
+        {% if payment_revenue is defined and payment_revenue %}
+        | Month | Revenue | Transactions | Avg Transaction |
+        |-------|---------|-------------|-----------------|
+        {% for month in payment_revenue %}
+        | {{ month.month }} | ${{ month.total_revenue|round(2) }} | {{ month.payment_count }} | ${{ month.avg_transaction|round(2) }} |
+        {% endfor %}
+        {% else %}
+        Payment revenue analysis in progress...
+        {% endif %}
+
+        ## Recent Software Purchases
+        {% if software_costs is defined and software_costs %}
+        {% for expense in software_costs[:10] %}
+        - **{{ expense.TxnDate }}**: ${{ expense.TotalAmt|round(2) }} - {{ expense.EntityRef.name if expense.EntityRef else 'Unknown' }}
+        {% endfor %}
+        {% else %}
+        Loading recent software purchases...
+        {% endif %}
+
+        ## Recent Closed Deals (Salesforce)
+        {% if won_deals is defined and won_deals %}
+        {% for deal in won_deals[:10] %}
+        - **{{ deal.CloseDate }}**: ${{ deal.Amount|round(2) }} - {{ deal.Name }}
+        {% endfor %}
+        {% else %}
+        Loading recent deals...
+        {% endif %}
+
+        ## Recent Closed Deals (HubSpot)
+        {% if closed_deals is defined and closed_deals %}
+        {% for deal in closed_deals[:10] %}
+        - **{{ deal.id }}**: ${{ deal.properties.amount }} - {{ deal.properties.dealname }}
+        {% endfor %}
+        {% else %}
+        Loading HubSpot deals...
+        {% endif %}
+
+        ## Recent Payments (Stripe)
+        {% if successful_payments is defined and successful_payments %}
+        {% for payment in successful_payments[:5] %}
+        - **Payment Date**: {{ payment.created }} - ${{ (payment.amount / 100)|round(2) }} - {{ payment.description }}
+        {% endfor %}
+        {% else %}
+        Loading Stripe payments...
+        {% endif %}
+
+        ## Paid Invoices (Xero)
+        {% if paid_invoices is defined and paid_invoices %}
+        {% for invoice in paid_invoices[:5] %}
+        - **{{ invoice.InvoiceNumber }}**: ${{ invoice.Total|round(2) }}
+        {% endfor %}
+        {% else %}
+        Loading Xero invoices...
+        {% endif %}
+
+        ---
+
+        ## Analysis Requirements
+
+        Please provide a comprehensive ROI analysis covering:
+
+        1. **Overall ROI Calculation**
+           - Total software costs vs. total revenue generated
+           - ROI percentage and payback period
+           - Cost per dollar of revenue generated
+
+        2. **Cost-Benefit Analysis**
+           - Which software investments are driving the most value?
+           - Are there any vendors with low ROI that should be reconsidered?
+           - Optimization opportunities to reduce costs while maintaining revenue
+
+        3. **Revenue Attribution**
+           - How does CRM software investment correlate with deal closures?
+           - What's the revenue impact of different software categories?
+           - Identify software tools that directly contribute to revenue growth
+
+        4. **Trend Analysis**
+           - Month-over-month cost trends
+           - Month-over-month revenue trends
+           - Efficiency improvements or deteriorations
+
+        5. **Executive Recommendations**
+           - Top 3 action items to improve software ROI
+           - Budget reallocation suggestions
+           - Tools to eliminate, reduce, or invest more in
+           - Expected financial impact of recommendations
+
+        6. **Risk Assessment**
+           - Over-investment in redundant tools
+           - Under-investment in critical revenue-driving software
+           - Vendor concentration risks
+
+        Format the analysis with clear sections, use bullet points for readability, and include specific dollar amounts and percentages wherever possible.
+
+      response_format: "text"
+
+output:
+  type: file
+  path: "output/software-roi-analysis.json"
+  format: json

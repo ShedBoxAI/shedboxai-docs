@@ -91,6 +91,23 @@ Discover complete, tested configurations that integrate multiple data sources, p
 
 ---
 
+### [💰 Software ROI Calculator & Cost Benefit Analysis](/software-roi-calculator)
+**Automated software ROI tracking with revenue attribution**
+
+- **Data Sources**: Salesforce + QuickBooks + HubSpot + Stripe + Xero
+- **AI Processing**: Revenue attribution analysis with cost-benefit insights
+- **Use Cases**: Software budget optimization, CFO reporting, SaaS spend management
+- **Setup Time**: 20 minutes with API credentials
+- **Complexity**: Intermediate
+
+**Key Features:**
+- Automatic revenue-to-software correlation across business tools
+- Month-over-month trend analysis and cost tracking
+- AI-generated ROI insights and optimization recommendations
+- Find $100K+ in wasted software spend (average company)
+
+---
+
 ## 🎯 Why Use These Configurations?
 
 ### **Production-Ready Code**
@@ -183,7 +200,6 @@ Have a powerful ShedBoxAI configuration? Share it with the community:
 - Use case description and business value
 
 ### **Join the Discussion**
-- **Discord Community**: Get help and share insights
 - **GitHub Discussions**: Technical questions and feature requests
 - **Stack Overflow**: Tag your questions with `shedboxai`
 

@@ -119,7 +119,14 @@ const config: Config = {
                   item.url.includes('/api-knowledge-base-integration') ||
                   item.url.includes('/knowledge-base-roi-calculator') ||
                   item.url.includes('/hubspot-knowledge-base-software') ||
-                  item.url.includes('/internal-knowledge-base-software')) {
+                  item.url.includes('/internal-knowledge-base-software') ||
+                  item.url.includes('/software-roi-calculator') ||
+                  item.url.includes('/software-roi-tracking') ||
+                  item.url.includes('/calculate-software-roi') ||
+                  item.url.includes('/software-roi-case-studies') ||
+                  item.url.includes('/software-roi-metrics') ||
+                  item.url.includes('/prove-software-roi-to-cfo') ||
+                  item.url.includes('/software-buying-decision-framework')) {
                 return {...item, priority: 0.9, changefreq: 'weekly'};
               }
               
