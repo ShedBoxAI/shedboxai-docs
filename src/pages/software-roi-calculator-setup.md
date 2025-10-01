@@ -439,4 +439,15 @@ advanced_operations:
 
 ---
 
+## Related Resources
+
+- 📊 [Free Software ROI Calculator](/software-roi-calculator) - Complete automated cost benefit analysis
+- 💡 [Calculate Software ROI: 4-Step Framework](/calculate-software-roi) - Step-by-step guide
+- 📈 [Software ROI Case Studies](/software-roi-case-studies) - Real companies, $100K+ saved
+- 🎯 [Software ROI Metrics CFOs Trust](/software-roi-metrics) - 7 metrics that matter
+- 🔌 [API Knowledge Base Integration](/api-knowledge-base-integration) - Connect your tools
+- 💼 [HubSpot Knowledge Base Software](/hubspot-knowledge-base-software) - HubSpot integration guide
+
+---
+
 *20 minutes to setup. $100K+ in savings. Stop procrastinating.*

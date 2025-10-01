@@ -180,7 +180,9 @@ Built on ShedBoxAI's open-source data pipeline, it connects to Salesforce, Quick
 - 📊 [Free Software ROI Calculator](/software-roi-calculator) - Complete automated cost benefit analysis
 - 🎯 [Software ROI Metrics CFOs Trust](/software-roi-metrics) - 7 metrics that matter
 - 💡 [Calculate Software ROI: 4-Step Framework](/calculate-software-roi) - Step-by-step guide
-- 🏢 [Configuration Marketplace](/marketplace) - More production-ready ShedBoxAI configs
+- 📈 [Software ROI Case Studies](/software-roi-case-studies) - Real companies, $100K+ saved
+- 🧠 [Knowledge Base Software](/knowledge-base-software) - API-powered documentation analytics
+- 💰 [Knowledge Base ROI Calculator](/knowledge-base-roi-calculator) - Measure KB effectiveness
 
 ---
 

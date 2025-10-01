@@ -307,8 +307,10 @@ Built on ShedBoxAI, it calculates:
 
 - 📊 [Free Software ROI Calculator](/software-roi-calculator) - Complete automated cost benefit analysis
 - 🎯 [Software ROI Metrics CFOs Trust](/software-roi-metrics) - 7 metrics that matter
-- 💰 [Software ROI Case Studies](/software-roi-case-studies) - Real companies, $100K+ saved
-- 🏢 [Configuration Marketplace](/marketplace) - More production-ready configs
+- 📈 [Software ROI Tracking Guide](/software-roi-tracking) - Why 73% waste their budget
+- ⚙️ [Software ROI Calculator Setup](/software-roi-calculator-setup) - 20-minute implementation
+- 💰 [Knowledge Base ROI Calculator](/knowledge-base-roi-calculator) - Measure KB effectiveness
+- 🔌 [API Knowledge Base Integration](/api-knowledge-base-integration) - Connect your tools
 
 ---
 

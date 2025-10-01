@@ -157,4 +157,15 @@ Learn how leading organizations are using intelligent knowledge base systems to 
 
 ---
 
+## Related Resources
+
+- 🧠 [Knowledge Base Software](/knowledge-base-software) - API-powered documentation analytics
+- 🏢 [Internal Knowledge Base Software](/internal-knowledge-base-software) - Enterprise KB solutions
+- 💰 [Knowledge Base ROI Calculator](/knowledge-base-roi-calculator) - Measure KB effectiveness
+- 🤔 [Software Buying Decision Framework](/software-buying-decision-framework) - 5-question evaluation
+- 📈 [Software ROI Tracking Guide](/software-roi-tracking) - Why 73% waste their budget
+- 🎯 [Software ROI Metrics CFOs Trust](/software-roi-metrics) - 7 metrics that matter
+
+---
+
 *Stop letting static documentation drain your resources. Join hundreds of organizations already using intelligent knowledge base systems to transform scattered data into strategic advantages.*

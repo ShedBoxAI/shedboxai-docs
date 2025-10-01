@@ -229,4 +229,15 @@ Discover the exact API integrations, processing workflows, and intelligence syst
 
 ---
 
+## Related Resources
+
+- 🧠 [Knowledge Base Software](/knowledge-base-software) - API-powered documentation analytics
+- 💼 [HubSpot Knowledge Base Software](/hubspot-knowledge-base-software) - HubSpot integration guide
+- 💰 [Knowledge Base ROI Calculator](/knowledge-base-roi-calculator) - Measure KB effectiveness
+- 📊 [Free Software ROI Calculator](/software-roi-calculator) - Complete automated cost benefit analysis
+- ⚙️ [Software ROI Calculator Setup](/software-roi-calculator-setup) - 20-minute implementation
+- 💡 [Calculate Software ROI: 4-Step Framework](/calculate-software-roi) - Step-by-step guide
+
+---
+
 *Stop letting static documentation drain your support resources. Join hundreds of organizations using API-powered intelligence to transform customer support operations.*

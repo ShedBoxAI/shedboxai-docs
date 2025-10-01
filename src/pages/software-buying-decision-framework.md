@@ -324,4 +324,17 @@ It answers Questions 1, 3, and 4 automatically by pulling from:
 
 **Five questions. Five minutes. Avoid $50K mistakes.**
 
+---
+
+## Related Resources
+
+- 📊 [Free Software ROI Calculator](/software-roi-calculator) - Complete automated cost benefit analysis
+- 💼 [Prove Software ROI to Your CFO](/prove-software-roi-to-cfo) - Win budget requests
+- 🎯 [Software ROI Metrics CFOs Trust](/software-roi-metrics) - 7 metrics that matter
+- 💡 [Calculate Software ROI: 4-Step Framework](/calculate-software-roi) - Step-by-step guide
+- 🧠 [Knowledge Base Software](/knowledge-base-software) - API-powered documentation analytics
+- 🔍 [Knowledge Base Problems](/knowledge-base-problems) - Common KB challenges
+
+---
+
 *Evaluate smartly. Buy confidently. Optimize continuously.*

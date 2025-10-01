@@ -297,4 +297,15 @@ It connects to your Salesforce, QuickBooks, HubSpot, Stripe, and other tools to 
 
 ---
 
+## Related Resources
+
+- 📊 [Free Software ROI Calculator](/software-roi-calculator) - Complete automated cost benefit analysis
+- 💡 [Calculate Software ROI: 4-Step Framework](/calculate-software-roi) - Step-by-step guide
+- 🎯 [Software ROI Metrics CFOs Trust](/software-roi-metrics) - 7 metrics that matter
+- ⚙️ [Software ROI Calculator Setup](/software-roi-calculator-setup) - 20-minute implementation
+- 💰 [Knowledge Base ROI Calculator](/knowledge-base-roi-calculator) - Measure KB effectiveness
+- 🧠 [Knowledge Base Software](/knowledge-base-software) - API-powered documentation analytics
+
+---
+
 *Find your $100K. Your CFO will celebrate.*

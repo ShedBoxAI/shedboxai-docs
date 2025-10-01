@@ -358,4 +358,17 @@ It connects to your Salesforce, QuickBooks, and other tools to generate CFO-read
 
 **The difference between approved and denied requests isn't the tool—it's the data.**
 
+---
+
+## Related Resources
+
+- 📊 [Free Software ROI Calculator](/software-roi-calculator) - Complete automated cost benefit analysis
+- 🎯 [Software ROI Metrics CFOs Trust](/software-roi-metrics) - 7 metrics that matter
+- 🤔 [Software Buying Decision Framework](/software-buying-decision-framework) - 5-question evaluation
+- 💡 [Calculate Software ROI: 4-Step Framework](/calculate-software-roi) - Step-by-step guide
+- 💰 [Knowledge Base ROI Calculator](/knowledge-base-roi-calculator) - Measure KB effectiveness
+- 🧠 [Knowledge Base Software](/knowledge-base-software) - API-powered documentation analytics
+
+---
+
 *Prove ROI. Win budgets. Build better companies.*

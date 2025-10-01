@@ -26,6 +26,10 @@ Traditional cost benefit analysis templates require manual data entry, spreadshe
 
 ---
 
+> **⚡ Want to skip the details?** [Download the free ROI calculator now →](#download-complete-cost-benefit-analysis-template)
+
+---
+
 ## The Problem: Why Software ROI Measurement Fails
 
 ### Manual Data Collection is Broken
@@ -940,7 +944,7 @@ Stop wasting budget on guesswork. Start measuring real ROI.
 
 **Download configurations**:
 - ✅ [Production configuration](/software-roi-calculator-production.yaml) - Connect to real APIs
-- ✅ [ShedBoxAI Documentation](/docs/getting-started/installation) - Complete setup guide
+- ✅ [ShedBoxAI Documentation](/docs/claude-code-integration) - Complete setup guide
 
 **Related Resources**:
 - 📊 [Brand Reputation Revenue Analytics](/brand-reputation-analytics) - Connect reputation to revenue

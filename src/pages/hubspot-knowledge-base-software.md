@@ -291,4 +291,15 @@ Learn the exact API integrations, analytics configurations, and optimization wor
 
 ---
 
+## Related Resources
+
+- 🧠 [Knowledge Base Software](/knowledge-base-software) - API-powered documentation analytics
+- 🔌 [API Knowledge Base Integration](/api-knowledge-base-integration) - Connect your tools
+- 🏢 [Internal Knowledge Base Software](/internal-knowledge-base-software) - Enterprise KB solutions
+- 📊 [Free Software ROI Calculator](/software-roi-calculator) - Complete automated cost benefit analysis
+- ⚙️ [Software ROI Calculator Setup](/software-roi-calculator-setup) - 20-minute implementation
+- 💼 [Prove Software ROI to Your CFO](/prove-software-roi-to-cfo) - Win budget requests
+
+---
+
 *Stop settling for basic HubSpot knowledge base functionality. Join organizations using API-powered intelligence to unlock the hidden potential in their HubSpot investment.*

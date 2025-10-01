@@ -377,4 +377,15 @@ It calculates all 7 CFO metrics by connecting to:
 
 ---
 
+## Related Resources
+
+- 📊 [Free Software ROI Calculator](/software-roi-calculator) - Complete automated cost benefit analysis
+- 💡 [Calculate Software ROI: 4-Step Framework](/calculate-software-roi) - Step-by-step guide
+- 💼 [Prove Software ROI to Your CFO](/prove-software-roi-to-cfo) - Win budget requests
+- 📈 [Software ROI Tracking Guide](/software-roi-tracking) - Why 73% waste their budget
+- 💰 [Knowledge Base ROI Calculator](/knowledge-base-roi-calculator) - Measure KB effectiveness
+- 🏢 [Internal Knowledge Base Software](/internal-knowledge-base-software) - Enterprise KB solutions
+
+---
+
 *Track the metrics CFOs trust. Protect your software budget.*
