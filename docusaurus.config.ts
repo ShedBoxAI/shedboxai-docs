@@ -100,69 +100,75 @@ const config: Config = {
           createSitemapItems: async (params) => {
             const {defaultCreateSitemapItems, ...rest} = params;
             const items = await defaultCreateSitemapItems(rest);
-            
+
             return items.map((item) => {
+              // Ensure trailing slash for all URLs (Docusaurus redirects to trailing slash)
+              let url = item.url;
+              if (!url.endsWith('/') && !url.match(/\.[a-z]+$/i)) {
+                url = url + '/';
+              }
+
               // Homepage gets highest priority
-              if (item.url === 'https://shedboxai.com/') {
-                return {...item, priority: 1.0, changefreq: 'daily'};
+              if (url === 'https://shedboxai.com/') {
+                return {...item, url, priority: 1.0, changefreq: 'daily'};
               }
               
               // Landing pages get high priority
-              if (item.url.includes('/claude-code-integration') ||
-                  item.url.includes('/ai-configuration-generation') ||
-                  item.url.includes('/social-media-demographics') ||
-                  item.url.includes('/weather-ecommerce') ||
-                  item.url.includes('/economic-retail-analytics') ||
-                  item.url.includes('/brand-reputation-analytics') ||
-                  item.url.includes('/knowledge-base-software') ||
-                  item.url.includes('/knowledge-base-problems') ||
-                  item.url.includes('/api-knowledge-base-integration') ||
-                  item.url.includes('/knowledge-base-roi-calculator') ||
-                  item.url.includes('/hubspot-knowledge-base-software') ||
-                  item.url.includes('/internal-knowledge-base-software') ||
-                  item.url.includes('/software-roi-calculator') ||
-                  item.url.includes('/software-roi-tracking') ||
-                  item.url.includes('/calculate-software-roi') ||
-                  item.url.includes('/software-roi-case-studies') ||
-                  item.url.includes('/software-roi-metrics') ||
-                  item.url.includes('/prove-software-roi-to-cfo') ||
-                  item.url.includes('/software-buying-decision-framework')) {
-                return {...item, priority: 0.9, changefreq: 'weekly'};
+              if (url.includes('/claude-code-integration') ||
+                  url.includes('/ai-configuration-generation') ||
+                  url.includes('/social-media-demographics') ||
+                  url.includes('/weather-ecommerce') ||
+                  url.includes('/economic-retail-analytics') ||
+                  url.includes('/brand-reputation-analytics') ||
+                  url.includes('/knowledge-base-software') ||
+                  url.includes('/knowledge-base-problems') ||
+                  url.includes('/api-knowledge-base-integration') ||
+                  url.includes('/knowledge-base-roi-calculator') ||
+                  url.includes('/hubspot-knowledge-base-software') ||
+                  url.includes('/internal-knowledge-base-software') ||
+                  url.includes('/software-roi-calculator') ||
+                  url.includes('/software-roi-tracking') ||
+                  url.includes('/calculate-software-roi') ||
+                  url.includes('/software-roi-case-studies') ||
+                  url.includes('/software-roi-metrics') ||
+                  url.includes('/prove-software-roi-to-cfo') ||
+                  url.includes('/software-buying-decision-framework')) {
+                return {...item, url, priority: 0.9, changefreq: 'weekly'};
               }
-              
+
               // Blog posts get medium-high priority
-              if (item.url.includes('/blog/') && !item.url.includes('/blog/tags') && 
-                  !item.url.includes('/blog/archive') && !item.url.includes('/blog/authors')) {
-                return {...item, priority: 0.8, changefreq: 'weekly'};
+              if (url.includes('/blog/') && !url.includes('/blog/tags') &&
+                  !url.includes('/blog/archive') && !url.includes('/blog/authors')) {
+                return {...item, url, priority: 0.8, changefreq: 'weekly'};
               }
-              
+
               // Key documentation pages
-              if (item.url.includes('/docs/getting-started/') || 
-                  item.url.includes('/docs/claude-code-integration')) {
-                return {...item, priority: 0.7, changefreq: 'weekly'};
+              if (url.includes('/docs/getting-started/') ||
+                  url.includes('/docs/claude-code-integration')) {
+                return {...item, url, priority: 0.7, changefreq: 'weekly'};
               }
-              
+
               // Other documentation
-              if (item.url.includes('/docs/')) {
-                return {...item, priority: 0.6, changefreq: 'weekly'};
+              if (url.includes('/docs/')) {
+                return {...item, url, priority: 0.6, changefreq: 'weekly'};
               }
-              
+
               // Main section pages
-              if (item.url.includes('/community') || 
-                  item.url.includes('/marketplace')) {
-                return {...item, priority: 0.5, changefreq: 'weekly'};
+              if (url.includes('/community') ||
+                  url.includes('/marketplace')) {
+                return {...item, url, priority: 0.5, changefreq: 'weekly'};
               }
-              
+
               // Utility and tag pages get lower priority
-              if (item.url.includes('/tags/') || 
-                  item.url.includes('/archive') || 
-                  item.url.includes('/authors') ||
-                  item.url.includes('/markdown-page')) {
-                return {...item, priority: 0.3, changefreq: 'monthly'};
+              if (url.includes('/tags/') ||
+                  url.includes('/archive') ||
+                  url.includes('/authors') ||
+                  url.includes('/markdown-page')) {
+                return {...item, url, priority: 0.3, changefreq: 'monthly'};
               }
-              
+
               // Default for other pages
-              return {...item, priority: 0.4, changefreq: 'weekly'};
+              return {...item, url, priority: 0.4, changefreq: 'weekly'};
             });
           },
         },

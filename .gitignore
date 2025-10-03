@@ -69,3 +69,6 @@ temp/
 
 # Claude Code files
 .claude/
+
+# Google Search Console tools
+gsc-tools/
