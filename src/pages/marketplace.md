@@ -108,6 +108,31 @@ Discover complete, tested configurations that integrate multiple data sources, p
 
 ---
 
+### [⏱️ Employee Productivity Tracking & Analytics](/employee-productivity-tracking)
+**Build custom productivity tracking without per-user fees**
+
+- **Data Sources**: Toggl + Harvest + Jira + GitHub + Slack + Google Calendar
+- **AI Processing**: Overtime detection, workload balancing, productivity insights
+- **Use Cases**: Team productivity optimization, resource allocation, burnout prevention
+- **Setup Time**: 15-30 minutes per configuration
+- **Complexity**: Intermediate
+
+**Key Features:**
+- Automated time tracking analytics and employee hour monitoring
+- Project progress tracking with live data from Jira and GitHub
+- Team communication analytics and meeting efficiency optimization
+- Software license and equipment utilization tracking
+- AI-powered workload balancing and capacity planning
+
+**Includes 5 Production Configurations:**
+- Time Tracking Dashboard
+- Project Progress Tracking
+- Team Communication Analytics
+- Inventory & Resource Utilization
+- Unified Productivity Dashboard
+
+---
+
 ## 🎯 Why Use These Configurations?
 
 ### **Production-Ready Code**
@@ -177,10 +202,12 @@ Use our [Claude Code Integration](/claude-code-integration) to automatically gen
 - Investment decision support
 
 ### **Operations & Business Intelligence**
+- Employee productivity tracking and analytics
 - Multi-source data integration
 - Automated reporting systems
 - Performance dashboards
 - Predictive analytics pipelines
+- Team workload optimization
 
 ## 🤝 Community Contributions
 
