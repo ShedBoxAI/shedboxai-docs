@@ -942,6 +942,12 @@ Stop wasting budget on guesswork. Start measuring real ROI.
 
 ## Download: Complete Cost Benefit Analysis Template
 
+:::info AI-Assisted Configuration with Introspection
+These configurations work with ShedBoxAI's **introspection feature**, which allows AI assistants (like Claude) to automatically explore your API data structure. When customizing these configs with an LLM, it can use introspection to understand your actual data fields and ensure accurate configuration.
+
+**Learn more**: [Data Introspection Guide](/docs/introspection/overview)
+:::
+
 **Download configurations**:
 - ✅ [Production configuration](/software-roi-calculator-production.yaml) - Connect to real APIs
 - ✅ [ShedBoxAI Documentation](/docs/claude-code-integration) - Complete setup guide

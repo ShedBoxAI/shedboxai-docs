@@ -1,0 +1,134 @@
+# Solution 1: Automated Time Tracking Dashboard - PRODUCTION CONFIG
+# Connects to Toggl Track API for real-time employee productivity analytics
+
+data_sources:
+  # Toggl Track API v9 - Time entries for workspace
+  # Get your API token from: https://track.toggl.com/profile
+  # Get workspace ID from: https://api.track.toggl.com/api/v9/workspaces
+  toggl_entries:
+    type: rest
+    url: "https://api.track.toggl.com/api/v9/me/time_entries"
+    headers:
+      Authorization: "Basic ${TOGGL_API_TOKEN}"  # Base64 encoded token:api_token
+      Content-Type: "application/json"
+    options:
+      params:
+        start_date: "2024-01-01T00:00:00Z"  # Adjust date range as needed
+        end_date: "2024-12-31T23:59:59Z"
+      timeout: 30
+
+processing:
+  # Step 1: Filter recent time entries
+  contextual_filtering:
+    toggl_entries:
+      - field: "start"
+        condition: ">= 2024-01-01"
+        new_name: "recent_entries"
+
+  # Step 2: Calculate overall statistics
+  content_summarization:
+    recent_entries:
+      method: "statistical"
+      fields: ["duration"]
+      summarize: ["sum", "mean", "count", "max", "min"]
+
+  # Step 3: Aggregate metrics by employee
+  advanced_operations:
+    employee_hours:
+      source: "recent_entries"
+      group_by: "user_name"
+      aggregate:
+        total_seconds: "SUM(duration)"
+        total_entries: "COUNT(*)"
+        avg_seconds: "AVG(duration)"
+        max_seconds: "MAX(duration)"
+      sort: "-total_seconds"
+
+    # Aggregate metrics by project
+    project_hours:
+      source: "recent_entries"
+      group_by: "project_name"
+      aggregate:
+        total_seconds: "SUM(duration)"
+        entry_count: "COUNT(*)"
+        avg_seconds: "AVG(duration)"
+      sort: "-total_seconds"
+
+ai_interface:
+  model:
+    type: rest
+    url: "https://api.openai.com/v1/chat/completions"
+    method: POST
+    headers:
+      Authorization: "Bearer ${OPENAI_API_KEY}"
+      Content-Type: "application/json"
+    options:
+      model: "gpt-4"
+      temperature: 0.3
+      max_tokens: 2000
+
+  default_context:
+    company: "${COMPANY_NAME}"
+    analysis_period: "2024"
+
+  prompts:
+    time_tracking_analysis:
+      system: "You are a productivity analyst specializing in workforce time management and workload optimization."
+      user_template: |
+        # Time Tracking Analysis for {{ company }} - {{ analysis_period }}
+
+        ## Overall Statistics
+        {% if recent_entries_summary is defined %}
+        - Total time entries: {{ recent_entries_summary.duration_count }}
+        - Total hours tracked: {{ ((recent_entries_summary.duration_sum | default(0)) / 3600) | round(1) }} hours
+        - Average entry duration: {{ ((recent_entries_summary.duration_mean | default(0)) / 3600) | round(1) }} hours
+        - Longest single entry: {{ ((recent_entries_summary.duration_max | default(0)) / 3600) | round(1) }} hours
+        {% else %}
+        Statistics pending data processing...
+        {% endif %}
+
+        ## Employee Performance Summary
+        {% if employee_hours is defined and employee_hours %}
+        {% for employee in employee_hours %}
+        **{{ employee.user_name }}**:
+        - Total Hours: {{ ((employee.total_seconds | default(0)) / 3600) | round(1) }} hours
+        - Time Entries: {{ employee.total_entries | default(0) }}
+        - Average Entry: {{ ((employee.avg_seconds | default(0)) / 3600) | round(1) }} hours
+        - Longest Entry: {{ ((employee.max_seconds | default(0)) / 3600) | round(1) }} hours
+        {% if ((employee.total_seconds | default(0)) / 3600) > 45 %}⚠️ OVERTIME RISK - Worked {{ ((employee.total_seconds | default(0)) / 3600) | round(1) }} hours{% endif %}
+
+        {% endfor %}
+        {% else %}
+        Employee data aggregation in progress...
+        {% endif %}
+
+        ## Project Resource Allocation
+        {% if project_hours is defined and project_hours %}
+        {% for project in project_hours %}
+        **{{ project.project_name }}**:
+        - Total Hours: {{ ((project.total_seconds | default(0)) / 3600) | round(1) }} hours
+        - Time Entries: {{ project.entry_count | default(0) }}
+        - Average Entry: {{ ((project.avg_seconds | default(0)) / 3600) | round(1) }} hours
+
+        {% endfor %}
+        {% else %}
+        Project data aggregation in progress...
+        {% endif %}
+
+        ## Analysis Request
+        Based on this time tracking data, provide:
+
+        1. **Productivity Patterns**: Identify which employees are most productive and efficient
+        2. **Overtime Risk Assessment**: Flag employees at risk of burnout from excessive hours
+        3. **Workload Balancing Recommendations**: Suggest how to redistribute work for better team balance
+        4. **Billable Time Optimization**: Identify opportunities to increase billable hours
+        5. **Action Items**: Specific recommendations for managers to improve time allocation
+
+        Focus on actionable insights that improve team productivity and prevent burnout.
+
+      response_format: "text"
+
+output:
+  type: file
+  path: "output/time-tracking-analysis.json"
+  format: json

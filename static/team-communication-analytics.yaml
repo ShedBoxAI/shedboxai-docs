@@ -1,0 +1,123 @@
+# Solution 3: Team Communication Analytics - PRODUCTION CONFIG
+# Real-time collaboration analysis from Slack, Google Calendar, and email
+
+data_sources:
+  # Slack API - Channel messages
+  slack_messages:
+    type: rest
+    url: "https://slack.com/api/conversations.history"
+    headers:
+      Authorization: "Bearer ${SLACK_BOT_TOKEN}"
+    options:
+      params:
+        channel: "${SLACK_CHANNEL_ID}"
+        limit: 100
+    response_path: "messages"
+
+  # Google Calendar API - Team events
+  calendar_events:
+    type: rest
+    url: "https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events"
+    headers:
+      Authorization: "Bearer ${GOOGLE_ACCESS_TOKEN}"
+    options:
+      params:
+        timeMin: "2024-01-01T00:00:00Z"
+        timeMax: "2024-12-31T23:59:59Z"
+        maxResults: 250
+    response_path: "items"
+
+processing:
+  # Filter meetings from calendar
+  contextual_filtering:
+    calendar_events:
+      - field: "eventType"
+        condition: "default"
+        new_name: "meetings"
+
+  # Communication statistics
+  content_summarization:
+    slack_messages:
+      method: "statistical"
+      fields: ["reply_count"]
+      summarize: ["sum", "mean", "count", "max"]
+
+    meetings:
+      method: "statistical"
+      fields: ["duration"]
+      summarize: ["sum", "mean", "count"]
+
+  # Aggregate metrics
+  advanced_operations:
+    person_communication:
+      source: "slack_messages"
+      group_by: "user"
+      aggregate:
+        message_count: "COUNT(*)"
+        total_threads: "SUM(reply_count)"
+      sort: "-message_count"
+
+    person_meetings:
+      source: "calendar_events"
+      group_by: "attendees.email"
+      aggregate:
+        total_meeting_time: "SUM(duration)"
+        meeting_count: "COUNT(*)"
+      sort: "-total_meeting_time"
+
+ai_interface:
+  model:
+    type: rest
+    url: "https://api.openai.com/v1/chat/completions"
+    method: POST
+    headers:
+      Authorization: "Bearer ${OPENAI_API_KEY}"
+      Content-Type: "application/json"
+    options:
+      model: "gpt-4"
+      temperature: 0.3
+      max_tokens: 2000
+
+  default_context:
+    company: "${COMPANY_NAME}"
+
+  prompts:
+    communication_analysis:
+      system: "You are a team productivity expert specializing in collaboration patterns and meeting efficiency."
+      user_template: |
+        # Team Communication Analysis for {{ company }}
+
+        ## Communication Metrics
+        {% if slack_messages_summary is defined %}
+        - Total Messages: {{ slack_messages_summary.reply_count_count }}
+        - Total Engagement: {{ slack_messages_summary.reply_count_sum }}
+        - Average Engagement: {{ (slack_messages_summary.reply_count_mean | default(0)) | round(1) }} replies/message
+        {% endif %}
+
+        ## Meeting Load
+        {% if meetings_summary is defined %}
+        - Total Meetings: {{ meetings_summary.duration_count }}
+        - Total Meeting Time: {{ ((meetings_summary.duration_sum | default(0)) / 3600) | round(1) }} hours
+        {% endif %}
+
+        ## Individual Patterns
+        {% if person_communication is defined %}
+        {% for person in person_communication %}
+        **{{ person.user }}**: {{ person.message_count }} messages, {{ person.total_threads }} thread replies
+        {% endfor %}
+        {% endif %}
+
+        {% if person_meetings is defined %}
+        {% for person in person_meetings %}
+        **{{ person['attendees.email'] }}**: {{ person.meeting_count }} meetings, {{ ((person.total_meeting_time | default(0)) / 3600) | round(1) }} hours
+        {% endfor %}
+        {% endif %}
+
+        Provide: 1) Collaboration health assessment, 2) Meeting efficiency recommendations, 3) Communication bottleneck identification, 4) Action items for optimization.
+
+      response_format: "text"
+
+output:
+  type: file
+  path: "output/team-communication-analysis.json"
+  format: json

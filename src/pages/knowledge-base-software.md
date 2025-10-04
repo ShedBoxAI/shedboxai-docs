@@ -327,6 +327,12 @@ shedboxai run knowledge-base-intelligence.yaml --output intelligence-report.json
 
 **Ready-to-deploy configuration:**
 
+:::info AI-Assisted Configuration with Introspection
+These configurations work with ShedBoxAI's **introspection feature**, which allows AI assistants (like Claude) to automatically explore your API data structure. When customizing these configs with an LLM, it can use introspection to understand your actual data fields and ensure accurate configuration.
+
+**Learn more**: [Data Introspection Guide](/docs/introspection/overview)
+:::
+
 **[📥 Production Configuration](/knowledge-base-intelligence.yaml)**
 Complete API-powered knowledge base intelligence system with real endpoints
 

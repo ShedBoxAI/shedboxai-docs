@@ -1,0 +1,6 @@
+# robots.txt for shedboxai.com
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://shedboxai.com/sitemap.xml

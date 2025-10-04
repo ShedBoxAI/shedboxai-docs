@@ -1,0 +1,105 @@
+# Solution 5: Unified Productivity Dashboard - PRODUCTION CONFIG
+# Executive dashboard combining all productivity data sources
+
+data_sources:
+  # Combine outputs from Solutions 1-4 or use unified APIs
+  time_tracking:
+    type: rest
+    url: "${TIME_TRACKING_API_URL}/summary"
+    headers:
+      Authorization: "Bearer ${TIME_API_KEY}"
+
+  project_data:
+    type: rest
+    url: "${PROJECT_API_URL}/metrics"
+    headers:
+      Authorization: "Bearer ${PROJECT_API_KEY}"
+
+  communication_data:
+    type: rest
+    url: "${COMMUNICATION_API_URL}/analytics"
+    headers:
+      Authorization: "Bearer ${COMM_API_KEY}"
+
+processing:
+  content_summarization:
+    time_tracking:
+      method: "statistical"
+      fields: ["total_hours", "billable_hours", "utilization"]
+      summarize: ["sum", "mean", "count"]
+
+    project_data:
+      method: "statistical"
+      fields: ["completion_rate", "velocity"]
+      summarize: ["mean", "sum"]
+
+    communication_data:
+      method: "statistical"
+      fields: ["message_count", "meeting_hours"]
+      summarize: ["sum", "mean"]
+
+  advanced_operations:
+    employee_metrics:
+      source: "time_tracking"
+      group_by: "employee_name"
+      aggregate:
+        total_hours: "SUM(hours)"
+        billable_hours: "SUM(billable)"
+        avg_utilization: "AVG(utilization)"
+      sort: "-total_hours"
+
+ai_interface:
+  model:
+    type: rest
+    url: "https://api.openai.com/v1/chat/completions"
+    method: POST
+    headers:
+      Authorization: "Bearer ${OPENAI_API_KEY}"
+      Content-Type: "application/json"
+    options:
+      model: "gpt-4"
+      temperature: 0.3
+      max_tokens: 2500
+
+  default_context:
+    company: "${COMPANY_NAME}"
+
+  prompts:
+    executive_dashboard:
+      system: "You are an executive productivity consultant providing comprehensive team performance analysis."
+      user_template: |
+        # Executive Productivity Dashboard for {{ company }}
+
+        ## Team Metrics
+        {% if time_tracking_summary is defined %}
+        - Total Hours: {{ time_tracking_summary.total_hours_sum }}
+        - Billable: {{ time_tracking_summary.billable_hours_sum }}
+        - Utilization: {{ (time_tracking_summary.utilization_mean * 100) | round(1) }}%
+        {% endif %}
+
+        ## Project Health
+        {% if project_data_summary is defined %}
+        - Avg Completion: {{ (project_data_summary.completion_rate_mean * 100) | round(1) }}%
+        - Total Velocity: {{ project_data_summary.velocity_sum }}
+        {% endif %}
+
+        ## Communication
+        {% if communication_data_summary is defined %}
+        - Messages: {{ communication_data_summary.message_count_sum }}
+        - Meeting Hours: {{ communication_data_summary.meeting_hours_sum }}
+        {% endif %}
+
+        {% if employee_metrics is defined %}
+        {% for emp in employee_metrics %}
+        **{{ emp.employee_name }}**: {{ emp.total_hours }}h ({{ emp.billable_hours }}h billable), {{ (emp.avg_utilization * 100) | round(1) }}% util
+        {% endfor %}
+        {% endif %}
+
+        Provide executive summary: 1) Team health, 2) Resource allocation, 3) Top 3 strategic actions, 4) ROI analysis.
+
+      response_format: "text"
+
+output:
+  type: file
+  path: "output/executive-productivity-dashboard.json"
+  format: json

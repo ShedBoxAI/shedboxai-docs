@@ -1,0 +1,174 @@
+# Solution 2: Project Progress Tracking - PRODUCTION CONFIG
+# Integrates Jira, GitHub, and time tracking for comprehensive project visibility
+
+data_sources:
+  # Jira API - Project issues
+  jira_issues:
+    type: rest
+    url: "https://${JIRA_DOMAIN}.atlassian.net/rest/api/3/search"
+    headers:
+      Authorization: "Basic ${JIRA_API_TOKEN}"
+      Content-Type: "application/json"
+    options:
+      params:
+        jql: "project = ${JIRA_PROJECT_KEY} AND updated >= -30d"
+        fields: "summary,status,assignee,customfield_10016,created,updated,timeestimate,timespent"
+        maxResults: 100
+    response_path: "issues"
+
+  # GitHub API - Repository commits
+  github_commits:
+    type: rest
+    url: "https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/commits"
+    headers:
+      Authorization: "Bearer ${GITHUB_TOKEN}"
+      Accept: "application/vnd.github+json"
+    options:
+      params:
+        since: "2024-01-01T00:00:00Z"
+        per_page: 100
+
+  # Time tracking API (Toggl/Clockify/Harvest)
+  time_entries:
+    type: rest
+    url: "${TIME_TRACKING_API_URL}"
+    headers:
+      Authorization: "Bearer ${TIME_TRACKING_API_KEY}"
+
+processing:
+  # Filter completed tasks
+  contextual_filtering:
+    jira_issues:
+      - field: "fields.status.name"
+        condition: "Done"
+        new_name: "completed_tasks"
+
+  # Calculate overall project metrics
+  content_summarization:
+    jira_issues:
+      method: "statistical"
+      fields: ["fields.customfield_10016", "fields.timeestimate", "fields.timespent"]
+      summarize: ["sum", "mean", "count", "max"]
+
+    completed_tasks:
+      method: "statistical"
+      fields: ["fields.customfield_10016", "fields.timespent"]
+      summarize: ["sum", "count"]
+
+  # Aggregate by assignee
+  advanced_operations:
+    assignee_workload:
+      source: "jira_issues"
+      group_by: "fields.assignee.displayName"
+      aggregate:
+        total_story_points: "SUM(fields.customfield_10016)"
+        total_tasks: "COUNT(*)"
+        estimated_hours: "SUM(fields.timeestimate)"
+        actual_hours: "SUM(fields.timespent)"
+      sort: "-total_story_points"
+
+    # Aggregate by status
+    status_breakdown:
+      source: "jira_issues"
+      group_by: "fields.status.name"
+      aggregate:
+        task_count: "COUNT(*)"
+        total_points: "SUM(fields.customfield_10016)"
+      sort: "-task_count"
+
+    # GitHub activity by author
+    commit_activity:
+      source: "github_commits"
+      group_by: "commit.author.name"
+      aggregate:
+        total_commits: "COUNT(*)"
+        total_additions: "SUM(stats.additions)"
+        total_deletions: "SUM(stats.deletions)"
+      sort: "-total_commits"
+
+ai_interface:
+  model:
+    type: rest
+    url: "https://api.openai.com/v1/chat/completions"
+    method: POST
+    headers:
+      Authorization: "Bearer ${OPENAI_API_KEY}"
+      Content-Type: "application/json"
+    options:
+      model: "gpt-4"
+      temperature: 0.3
+      max_tokens: 2500
+
+  default_context:
+    company: "${COMPANY_NAME}"
+    project: "${PROJECT_NAME}"
+
+  prompts:
+    project_analysis:
+      system: "You are a project management expert specializing in Agile delivery and resource optimization."
+      user_template: |
+        # Project Progress Analysis for {{ company }} - {{ project }}
+
+        ## Sprint Overview
+        {% if jira_issues_summary is defined %}
+        - Total Tasks: {{ jira_issues_summary.fields_customfield_10016_count }}
+        - Total Story Points: {{ jira_issues_summary.fields_customfield_10016_sum }}
+        - Estimated Hours: {{ ((jira_issues_summary.fields_timeestimate_sum | default(0)) / 3600) | round(1) }}
+        - Actual Hours Spent: {{ ((jira_issues_summary.fields_timespent_sum | default(0)) / 3600) | round(1) }}
+        {% endif %}
+
+        ## Completed Work
+        {% if completed_tasks_summary is defined %}
+        - Completed Tasks: {{ completed_tasks_summary.fields_customfield_10016_count }}
+        - Completed Story Points: {{ completed_tasks_summary.fields_customfield_10016_sum }}
+        - Hours on Completed Work: {{ ((completed_tasks_summary.fields_timespent_sum | default(0)) / 3600) | round(1) }}
+        {% endif %}
+
+        ## Team Workload Distribution
+        {% if assignee_workload is defined %}
+        {% for member in assignee_workload %}
+        **{{ member['fields.assignee.displayName'] }}**:
+        - Story Points: {{ member.total_story_points }}
+        - Tasks: {{ member.total_tasks }}
+        - Estimated: {{ ((member.estimated_hours | default(0)) / 3600) | round(1) }} hours
+        - Actual: {{ ((member.actual_hours | default(0)) / 3600) | round(1) }} hours
+
+        {% endfor %}
+        {% endif %}
+
+        ## Status Breakdown
+        {% if status_breakdown is defined %}
+        {% for status in status_breakdown %}
+        - **{{ status['fields.status.name'] }}**: {{ status.task_count }} tasks ({{ status.total_points }} points)
+        {% endfor %}
+        {% endif %}
+
+        ## Development Activity (GitHub)
+        {% if commit_activity is defined %}
+        {% for developer in commit_activity %}
+        **{{ developer['commit.author.name'] }}**:
+        - Commits: {{ developer.total_commits }}
+        - Lines Added: {{ developer.total_additions }}
+        - Lines Deleted: {{ developer.total_deletions }}
+
+        {% endfor %}
+        {% endif %}
+
+        ## Analysis Request
+        Based on this project tracking data, provide:
+
+        1. **Project Health Assessment**: Is the project on track, at risk, or behind schedule?
+        2. **Velocity Analysis**: Calculate team velocity and predict completion timeline
+        3. **Bottleneck Identification**: Which tasks or team members are blocking progress?
+        4. **Resource Reallocation**: Should workload be redistributed for better balance?
+        5. **Risk Mitigation**: What specific actions should the PM take to prevent delays?
+        6. **Estimation Accuracy**: Are time estimates realistic?
+
+        Provide actionable recommendations with specific task IDs and team member names.
+
+      response_format: "text"
+
+output:
+  type: file
+  path: "output/project-tracking-analysis.json"
+  format: json

@@ -1,0 +1,107 @@
+# Solution 4: Inventory & Resource Utilization - PRODUCTION CONFIG
+
+data_sources:
+  license_usage:
+    type: rest
+    url: "${LICENSE_MANAGEMENT_API_URL}/licenses"
+    headers:
+      Authorization: "Bearer ${LICENSE_API_KEY}"
+
+  equipment_logs:
+    type: rest
+    url: "${ASSET_MANAGEMENT_API_URL}/equipment"
+    headers:
+      Authorization: "Bearer ${ASSET_API_KEY}"
+
+processing:
+  contextual_filtering:
+    license_usage:
+      - field: "utilization_rate"
+        condition: "< 0.5"
+        new_name: "underutilized_licenses"
+
+    equipment_logs:
+      - field: "status"
+        condition: "in_use"
+        new_name: "active_equipment"
+
+  content_summarization:
+    license_usage:
+      method: "statistical"
+      fields: ["license_cost_monthly", "utilization_rate"]
+      summarize: ["sum", "mean", "count"]
+
+    underutilized_licenses:
+      method: "statistical"
+      fields: ["license_cost_monthly"]
+      summarize: ["sum", "count"]
+
+  advanced_operations:
+    person_licenses:
+      source: "license_usage"
+      group_by: "assigned_to"
+      aggregate:
+        license_count: "COUNT(*)"
+        total_monthly_cost: "SUM(license_cost_monthly)"
+        avg_utilization: "AVG(utilization_rate)"
+      sort: "-total_monthly_cost"
+
+    equipment_status:
+      source: "equipment_logs"
+      group_by: "status"
+      aggregate:
+        count: "COUNT(*)"
+        total_value: "SUM(equipment_value)"
+      sort: "-count"
+
+ai_interface:
+  model:
+    type: rest
+    url: "https://api.openai.com/v1/chat/completions"
+    method: POST
+    headers:
+      Authorization: "Bearer ${OPENAI_API_KEY}"
+      Content-Type: "application/json"
+    options:
+      model: "gpt-4"
+      temperature: 0.3
+      max_tokens: 2000
+
+  default_context:
+    company: "${COMPANY_NAME}"
+
+  prompts:
+    inventory_analysis:
+      system: "You are an IT asset management expert specializing in resource optimization and cost reduction."
+      user_template: |
+        # Inventory Analysis for {{ company }}
+
+        ## License Overview
+        {% if license_usage_summary is defined %}
+        - Total Licenses: {{ license_usage_summary.license_cost_monthly_count }}
+        - Monthly Cost: ${{ license_usage_summary.license_cost_monthly_sum | round(2) }}
+        - Avg Utilization: {{ (license_usage_summary.utilization_rate_mean * 100) | round(1) }}%
+        {% endif %}
+
+        ## Underutilized Licenses
+        {% if underutilized_licenses_summary is defined %}
+        - Count: {{ underutilized_licenses_summary.license_cost_monthly_count }}
+        - Wasted Monthly: ${{ underutilized_licenses_summary.license_cost_monthly_sum | round(2) }}
+        - Annual Savings Potential: ${{ (underutilized_licenses_summary.license_cost_monthly_sum * 12) | round(2) }}
+        {% endif %}
+
+        ## License Costs by Person
+        {% if person_licenses is defined %}
+        {% for person in person_licenses %}
+        **{{ person.assigned_to }}**: {{ person.license_count }} licenses, ${{ person.total_monthly_cost | round(2) }}/mo, {{ (person.avg_utilization * 100) | round(1) }}% utilization
+        {% endfor %}
+        {% endif %}
+
+        Provide: 1) Cost optimization recommendations, 2) Annual savings calculation, 3) Action items with specific licenses to cancel/reassign.
+
+      response_format: "text"
+
+output:
+  type: file
+  path: "output/inventory-utilization-analysis.json"
+  format: json

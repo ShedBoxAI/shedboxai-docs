@@ -500,6 +500,13 @@ Your brand reputation revenue analytics system will reveal critical insights:
 🤖 **AI Assistant Integration**: The configuration works seamlessly with AI assistants for automated analysis and reporting.
 
 ### Scale Your System
+
+:::info AI-Assisted Configuration with Introspection
+These configurations work with ShedBoxAI's **introspection feature**, which allows AI assistants (like Claude) to automatically explore your API data structure. When customizing these configs with an LLM, it can use introspection to understand your actual data fields and ensure accurate configuration.
+
+**Learn more**: [Data Introspection Guide](/docs/introspection/overview)
+:::
+
 1. **[Start Today](/brand-reputation-revenue-correlation.yaml)**: Download tested configuration - works in 15 minutes
 2. **Add Platforms**: Expand beyond the 5 included APIs (Twitter, Google Reviews, Shopify, Stripe, Yelp)
 3. **Automate Monitoring**: Built-in daily aggregation and correlation analysis

@@ -132,7 +132,13 @@ const config: Config = {
                   url.includes('/software-roi-case-studies') ||
                   url.includes('/software-roi-metrics') ||
                   url.includes('/prove-software-roi-to-cfo') ||
-                  url.includes('/software-buying-decision-framework')) {
+                  url.includes('/software-buying-decision-framework') ||
+                  url.includes('/employee-productivity-tracking') ||
+                  url.includes('/excel-project-tracking-template') ||
+                  url.includes('/time-tracking-software') ||
+                  url.includes('/time-tracking-sheet-template') ||
+                  url.includes('/employee-hour-tracking-software') ||
+                  url.includes('/inventory-tracking-sheet')) {
                 return {...item, url, priority: 0.9, changefreq: 'weekly'};
               }
 
