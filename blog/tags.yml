@@ -3,3 +3,48 @@ shedboxai:
   label: ShedBoxAI
   permalink: /shedboxai
   description: ShedBoxAI framework and features
+
+productivity:
+  label: Productivity
+  permalink: /productivity
+  description: Productivity tracking and analytics
+
+time-tracking:
+  label: Time Tracking
+  permalink: /time-tracking
+  description: Time tracking tools and templates
+
+templates:
+  label: Templates
+  permalink: /templates
+  description: Ready-to-use configuration templates
+
+automation:
+  label: Automation
+  permalink: /automation
+  description: Workflow automation and data pipeline automation
+
+comparison:
+  label: Comparison
+  permalink: /comparison
+  description: Tool comparisons and evaluations
+
+apache-airflow:
+  label: Apache Airflow
+  permalink: /apache-airflow
+  description: Apache Airflow related content
+
+data-pipelines:
+  label: Data Pipelines
+  permalink: /data-pipelines
+  description: Data pipeline architecture and best practices
+
+ai-configuration:
+  label: AI Configuration
+  permalink: /ai-configuration
+  description: AI-powered configuration generation
+
+yaml:
+  label: YAML
+  permalink: /yaml
+  description: YAML configuration and best practices

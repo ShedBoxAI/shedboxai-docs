@@ -125,11 +125,15 @@ Discover complete, tested configurations that integrate multiple data sources, p
 - AI-powered workload balancing and capacity planning
 
 **Includes 5 Production Configurations:**
-- Time Tracking Dashboard
-- Project Progress Tracking
-- Team Communication Analytics
-- Inventory & Resource Utilization
-- Unified Productivity Dashboard
+- [Time Tracking Dashboard & Sheet Template](/time-tracking-sheet-template/) - Auto-updating time sheets from Toggl/Harvest/Clockify
+- [Project Progress Tracking & Excel Template](/excel-project-tracking-template/) - Live Jira, Asana & GitHub integration
+- [Team Communication Analytics](/employee-productivity-tracking/#solution-3-team-communication-analytics) - Slack & Google Calendar analysis
+- [Inventory & Resource Utilization Tracking](/inventory-tracking-sheet/) - Software license & equipment monitoring
+- [Unified Productivity Dashboard](/employee-productivity-tracking/#solution-5-unified-productivity-dashboard) - Executive-level KPIs
+
+**Individual Template Guides:**
+- [Employee Hour Tracking Software](/employee-hour-tracking-software/) - Custom staff time tracking without per-user fees
+- [Time Tracking Software Comparison](/time-tracking-software/) - Build vs. buy analysis for time tracking systems
 
 ---
 
