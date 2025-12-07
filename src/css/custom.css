@@ -220,6 +220,10 @@ body {
   top: 0;
   z-index: 9999 !important;
   overflow: visible !important;
+  /* Force full viewport width - break out of any container */
+  width: 100vw !important;
+  max-width: 100vw !important;
+  margin-left: calc(-50vw + 50%) !important;
 }
 
 /* Disable backdrop-filter when mobile menu is open to fix stacking context */
