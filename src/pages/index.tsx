@@ -24,7 +24,7 @@ function HeroSection(): ReactNode {
 
         <p className={styles.heroSubtitle}>
           Transform complex data workflows into simple YAML. Connect any data source,
-          process with AI, and deploy in minutes — not months.
+          process with AI, and deploy in minutes, not months.
         </p>
 
         <div className={styles.heroButtons}>
