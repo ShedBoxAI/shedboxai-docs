@@ -220,6 +220,12 @@ const config: Config = {
     ],
   ],
   themeConfig: {
+    // Color mode - dark by default, only 2 options (no system preference)
+    colorMode: {
+      defaultMode: 'dark',
+      disableSwitch: false,
+      respectPrefersColorScheme: false,
+    },
     // Replace with your project's social card
     image: 'img/logo_with_text.png',
     metadata: [

@@ -1,254 +1,172 @@
-# ShedBoxAI Configuration Marketplace
+---
+title: Configuration Marketplace
+description: Production-ready ShedBoxAI configurations for real-world data processing and AI-powered analytics.
+---
 
-**Production-ready ShedBoxAI configurations for real-world data processing and AI-powered analytics.**
+# Configuration Marketplace
 
-Discover complete, tested configurations that integrate multiple data sources, process complex datasets, and generate actionable insights using ShedBoxAI's powerful YAML-based framework.
-
-## 🚀 Featured Data Integration Solutions
-
-### [📊 Social Media Demographics Analysis](/social-media-demographics)
-**Analyze audience engagement patterns across demographic segments**
-
-- **Data Sources**: Twitter API + US Census Bureau demographics  
-- **AI Processing**: Demographic correlation analysis with engagement insights
-- **Use Cases**: Brand marketing, political campaigns, content strategy
-- **Setup Time**: 10 minutes with API keys
-- **Complexity**: Intermediate
-
-**Key Features:**
-- Real-time social media data processing
-- Demographic enrichment with census data
-- AI-powered audience segmentation
-- Engagement optimization recommendations
+Production-ready ShedBoxAI configurations for real-world data processing and AI-powered analytics. Discover complete, tested configurations that integrate multiple data sources, process complex datasets, and generate actionable insights.
 
 ---
 
-### [🌦️ Weather-Driven E-commerce Analytics](/weather-ecommerce)
-**Optimize inventory and marketing based on weather forecasts**
+## Featured Solutions
 
-- **Data Sources**: OpenWeather API + Shopify/E-commerce sales data
-- **AI Processing**: Weather-sales correlation with predictive insights  
-- **Use Cases**: Retail optimization, inventory management, seasonal marketing
-- **Setup Time**: 15 minutes with store integration
-- **Complexity**: Intermediate
+### [Social Media Demographics Analysis](/social-media-demographics)
 
-**Key Features:**
-- Weather pattern correlation with sales data
-- Inventory optimization recommendations
-- Seasonal demand forecasting
-- Weather-based marketing automation
+Analyze audience engagement patterns across demographic segments.
 
----
+| | |
+|---|---|
+| **Data Sources** | Twitter API + US Census Bureau demographics |
+| **AI Processing** | Demographic correlation analysis |
+| **Setup Time** | 10 minutes |
+| **Complexity** | Intermediate |
 
-### [📈 Economic Indicators & Retail Performance](/economic-retail-analytics)
-**Make data-driven decisions during economic uncertainty**
-
-- **Data Sources**: Federal Reserve API + Consumer data + Retail sales
-- **AI Processing**: Economic impact analysis with recession preparedness
-- **Use Cases**: Strategic planning, risk management, market analysis
-- **Setup Time**: 20 minutes with economic data APIs
-- **Complexity**: Advanced
-
-**Key Features:**
-- Macroeconomic indicator tracking
-- Recession readiness assessment
-- Consumer behavior correlation analysis
-- Economic scenario planning
+**Key Features:** Real-time social media processing, demographic enrichment, AI-powered audience segmentation, engagement optimization.
 
 ---
 
-### [🧠 API-Powered Knowledge Base Intelligence](/knowledge-base-software)
-**Transform static documentation into intelligent support systems**
+### [Weather-Driven E-commerce Analytics](/weather-ecommerce)
 
-- **Data Sources**: Zendesk + Notion + Google Analytics + HubSpot + Intercom
-- **AI Processing**: Support ticket analysis with content optimization insights
-- **Use Cases**: Customer support optimization, documentation intelligence, support cost reduction
-- **Setup Time**: 25 minutes with API integrations
-- **Complexity**: Advanced
+Optimize inventory and marketing based on weather forecasts.
 
-**Key Features:**
-- Real-time support ticket and content performance analysis
-- Automated content gap identification and optimization recommendations
-- Customer context integration for personalized documentation
-- 40% support ticket reduction through intelligent knowledge management
+| | |
+|---|---|
+| **Data Sources** | OpenWeather API + Shopify/E-commerce data |
+| **AI Processing** | Weather-sales correlation |
+| **Setup Time** | 15 minutes |
+| **Complexity** | Intermediate |
+
+**Key Features:** Weather pattern correlation, inventory optimization, seasonal demand forecasting, weather-based marketing.
 
 ---
 
-### [🛡️ Brand Reputation Revenue Analytics](/brand-reputation-analytics)
-**Connect brand reputation directly to revenue impact**
+### [Economic Indicators & Retail Performance](/economic-retail-analytics)
 
-- **Data Sources**: Twitter API + Google Reviews + Shopify sales data
-- **AI Processing**: Sentiment analysis with revenue correlation insights
-- **Use Cases**: Brand management, crisis prevention, competitive intelligence
-- **Setup Time**: 15 minutes with API keys
-- **Complexity**: Intermediate
+Make data-driven decisions during economic uncertainty.
 
-**Key Features:**
-- Real-time reputation monitoring across platforms
-- Revenue impact correlation analysis
-- Crisis prediction and early warning systems
-- Competitor reputation intelligence
+| | |
+|---|---|
+| **Data Sources** | Federal Reserve API + Consumer + Retail data |
+| **AI Processing** | Economic impact analysis |
+| **Setup Time** | 20 minutes |
+| **Complexity** | Advanced |
+
+**Key Features:** Macroeconomic tracking, recession readiness, consumer behavior analysis, scenario planning.
 
 ---
 
-### [💰 Software ROI Calculator & Cost Benefit Analysis](/software-roi-calculator)
-**Automated software ROI tracking with revenue attribution**
+### [API-Powered Knowledge Base Intelligence](/knowledge-base-software)
 
-- **Data Sources**: Salesforce + QuickBooks + HubSpot + Stripe + Xero
-- **AI Processing**: Revenue attribution analysis with cost-benefit insights
-- **Use Cases**: Software budget optimization, CFO reporting, SaaS spend management
-- **Setup Time**: 20 minutes with API credentials
-- **Complexity**: Intermediate
+Transform static documentation into intelligent support systems.
 
-**Key Features:**
-- Automatic revenue-to-software correlation across business tools
-- Month-over-month trend analysis and cost tracking
-- AI-generated ROI insights and optimization recommendations
-- Find $100K+ in wasted software spend (average company)
+| | |
+|---|---|
+| **Data Sources** | Zendesk + Notion + Google Analytics + HubSpot |
+| **AI Processing** | Support ticket analysis |
+| **Setup Time** | 25 minutes |
+| **Complexity** | Advanced |
+
+**Key Features:** Real-time support analysis, content gap identification, 40% support ticket reduction potential.
 
 ---
 
-### [⏱️ Employee Productivity Tracking & Analytics](/employee-productivity-tracking)
-**Build custom productivity tracking without per-user fees**
+### [Brand Reputation Revenue Analytics](/brand-reputation-analytics)
 
-- **Data Sources**: Toggl + Harvest + Jira + GitHub + Slack + Google Calendar
-- **AI Processing**: Overtime detection, workload balancing, productivity insights
-- **Use Cases**: Team productivity optimization, resource allocation, burnout prevention
-- **Setup Time**: 15-30 minutes per configuration
-- **Complexity**: Intermediate
+Connect brand reputation directly to revenue impact.
 
-**Key Features:**
-- Automated time tracking analytics and employee hour monitoring
-- Project progress tracking with live data from Jira and GitHub
-- Team communication analytics and meeting efficiency optimization
-- Software license and equipment utilization tracking
-- AI-powered workload balancing and capacity planning
+| | |
+|---|---|
+| **Data Sources** | Twitter API + Google Reviews + Shopify |
+| **AI Processing** | Sentiment analysis with revenue correlation |
+| **Setup Time** | 15 minutes |
+| **Complexity** | Intermediate |
+
+**Key Features:** Real-time reputation monitoring, revenue impact analysis, crisis prediction, competitor intelligence.
+
+---
+
+### [Software ROI Calculator](/software-roi-calculator)
+
+Automated software ROI tracking with revenue attribution.
+
+| | |
+|---|---|
+| **Data Sources** | Salesforce + QuickBooks + HubSpot + Stripe |
+| **AI Processing** | Revenue attribution analysis |
+| **Setup Time** | 20 minutes |
+| **Complexity** | Intermediate |
+
+**Key Features:** Revenue-to-software correlation, cost tracking, AI-generated ROI insights. Find $100K+ in wasted spend.
+
+---
+
+### [Employee Productivity Tracking](/employee-productivity-tracking)
+
+Build custom productivity tracking without per-user fees.
+
+| | |
+|---|---|
+| **Data Sources** | Toggl + Harvest + Jira + GitHub + Slack |
+| **AI Processing** | Overtime detection, workload balancing |
+| **Setup Time** | 15-30 minutes |
+| **Complexity** | Intermediate |
 
 **Includes 5 Production Configurations:**
-- [Time Tracking Dashboard & Sheet Template](/time-tracking-sheet-template/) - Auto-updating time sheets from Toggl/Harvest/Clockify
-- [Project Progress Tracking & Excel Template](/excel-project-tracking-template/) - Live Jira, Asana & GitHub integration
-- [Team Communication Analytics](/employee-productivity-tracking/#solution-3-team-communication-analytics) - Slack & Google Calendar analysis
-- [Inventory & Resource Utilization Tracking](/inventory-tracking-sheet/) - Software license & equipment monitoring
-- [Unified Productivity Dashboard](/employee-productivity-tracking/#solution-5-unified-productivity-dashboard) - Executive-level KPIs
-
-**Individual Template Guides:**
-- [Employee Hour Tracking Software](/employee-hour-tracking-software/) - Custom staff time tracking without per-user fees
-- [Time Tracking Software Comparison](/time-tracking-software/) - Build vs. buy analysis for time tracking systems
+- [Time Tracking Sheet Template](/time-tracking-sheet-template/) - Auto-updating time sheets
+- [Excel Project Tracking Template](/excel-project-tracking-template/) - Live Jira & GitHub integration
+- [Inventory Tracking Sheet](/inventory-tracking-sheet/) - Software license monitoring
+- [Employee Hour Tracking Software](/employee-hour-tracking-software/) - Custom staff tracking
+- [Time Tracking Software Comparison](/time-tracking-software/) - Build vs. buy analysis
 
 ---
 
-## 🎯 Why Use These Configurations?
+## Why Use These Configurations?
 
-### **Production-Ready Code**
-- Complete YAML configurations with real API integrations
-- Tested with actual data sources and endpoints
-- Comprehensive error handling and data validation
-- Ready to run with minimal setup
+| Feature | Benefit |
+|---------|---------|
+| **Production-Ready** | Complete YAML configs with real API integrations, tested and ready to run |
+| **AI-Powered** | OpenAI GPT-4 integration with custom prompt engineering |
+| **Business Value** | Immediate ROI through data-driven decision making |
+| **Easy Setup** | Step-by-step instructions with sample data included |
 
-### **AI-Powered Insights**
-- OpenAI GPT-4 integration for intelligent analysis
-- Custom prompt engineering for business insights
-- Automated report generation and recommendations
-- Context-aware data interpretation
+---
 
-### **Business Value**
-- Immediate ROI through data-driven decision making
-- Competitive advantages through advanced analytics
-- Risk reduction via predictive insights
-- Operational efficiency improvements
+## Getting Started
 
-### **Easy Implementation**
-- Step-by-step setup instructions included
-- Environment variable configuration guides
-- Sample data and expected output examples
-- Troubleshooting and customization tips
-
-## 🛠️ Getting Started
-
-### 1. **Choose Your Configuration**
-Select the data integration solution that matches your business needs from the featured solutions above.
-
-### 2. **Set Up ShedBoxAI** 
 ```bash
+# 1. Install ShedBoxAI
 pip install shedboxai
-```
 
-### 3. **Configure APIs**
-Follow the setup instructions on each configuration page to obtain and configure the required API keys.
-
-### 4. **Run Your Analysis**
-```bash
+# 2. Run your configuration
 shedboxai run your-config.yaml
 ```
 
-### 5. **Generate Insights with Claude Code**
-Use our [Claude Code Integration](/claude-code-integration) to automatically generate and customize configurations with AI assistance.
-
-## 📚 Configuration Categories
-
-### **Marketing & Analytics**
-- Social media demographics analysis
-- Brand reputation revenue analytics
-- Customer behavior tracking
-- Campaign performance optimization
-- Market research automation
-
-### **E-commerce & Retail**  
-- Weather-driven sales optimization
-- Inventory management systems
-- Customer lifecycle analysis
-- Seasonal demand forecasting
-
-### **Finance & Economics**
-- Economic indicator monitoring
-- Risk assessment frameworks
-- Market trend analysis
-- Investment decision support
-
-### **Operations & Business Intelligence**
-- Employee productivity tracking and analytics
-- Multi-source data integration
-- Automated reporting systems
-- Performance dashboards
-- Predictive analytics pipelines
-- Team workload optimization
-
-## 🤝 Community Contributions
-
-### **Submit Your Configuration**
-Have a powerful ShedBoxAI configuration? Share it with the community:
-
-1. **Fork our repository** on [GitHub](https://github.com/ShedBoxAI/shedboxai-configs)
-2. **Add your configuration** with documentation and examples
-3. **Submit a pull request** for review
-4. **Get featured** in the marketplace
-
-### **Configuration Requirements**
-- Complete YAML configuration file
-- Setup documentation with API requirements
-- Sample data or mock data examples
-- Expected output examples
-- Use case description and business value
-
-### **Join the Discussion**
-- **GitHub Discussions**: Technical questions and feature requests
-- **Stack Overflow**: Tag your questions with `shedboxai`
-
-## 🚀 Advanced Features
-
-### **Claude Code Integration**
-All configurations are optimized for [Claude Code](/claude-code-integration) generation:
-- Automated YAML creation from natural language descriptions
-- Custom prompt engineering for specific use cases
-- Configuration optimization and best practice suggestions
-- Rapid prototyping and iteration
-
-### **Enterprise Solutions**
-- Custom configuration development
-- White-label marketplace solutions
-- Enterprise API rate limits and support
-- Professional services and consulting
+Use [Claude Code Integration](/docs/claude-code-integration) to automatically generate and customize configurations with AI assistance.
 
 ---
 
-**Ready to transform your data processing with ShedBoxAI?** Start with any of the featured configurations above, or explore our comprehensive [documentation](/docs/getting-started/installation) to build your own custom solutions.
+## Configuration Categories
+
+| Category | Examples |
+|----------|----------|
+| **Marketing & Analytics** | Social media demographics, brand reputation, campaign performance |
+| **E-commerce & Retail** | Weather-driven sales, inventory management, demand forecasting |
+| **Finance & Economics** | Economic indicators, risk assessment, market trends |
+| **Operations & BI** | Productivity tracking, automated reporting, predictive analytics |
+
+---
+
+## Community Contributions
+
+Have a powerful configuration? Share it:
+
+1. Fork our [GitHub repository](https://github.com/ShedBoxAI/shedboxai-configs)
+2. Add your configuration with documentation
+3. Submit a pull request
+
+**Requirements:** Complete YAML config, setup documentation, sample data, expected output examples.
+
+---
+
+**Ready to start?** Pick a configuration above or explore our [documentation](/docs/getting-started/installation) to build custom solutions.
