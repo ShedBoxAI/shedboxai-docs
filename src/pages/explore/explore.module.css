@@ -1,0 +1,496 @@
+/**
+ * Explore Section Styles
+ * pSEO pages for ShedBoxAI and ShedBox Agent
+ */
+
+/* ============================================
+   EXPLORE HUB LAYOUT
+   ============================================ */
+
+.exploreContainer {
+  min-height: 80vh;
+  padding: 4rem 2rem;
+  background: var(--ifm-background-color);
+}
+
+.exploreContent {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+
+.exploreHero {
+  text-align: center;
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.exploreHero::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(0, 212, 170, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.exploreBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(0, 212, 170, 0.1);
+  border: 1px solid rgba(0, 212, 170, 0.2);
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ifm-color-primary);
+  margin-bottom: 1.5rem;
+}
+
+.exploreTitle {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0 0 1rem 0;
+  line-height: 1.1;
+}
+
+.exploreTitleGradient {
+  background: linear-gradient(135deg, #00d4aa 0%, #00e9bb 50%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.exploreSubtitle {
+  font-size: 1.25rem;
+  color: var(--ifm-font-color-secondary);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ============================================
+   PRODUCT CARDS GRID
+   ============================================ */
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.productCard {
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 2.5rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+}
+
+.productCard:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  color: inherit;
+}
+
+.productCardTeal {
+  border-color: rgba(0, 212, 170, 0.2);
+}
+
+.productCardTeal:hover {
+  border-color: rgba(0, 212, 170, 0.4);
+}
+
+.productCardBlue {
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+.productCardBlue:hover {
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+.productCardGlow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.productCardGlowTeal {
+  background: rgba(0, 212, 170, 0.3);
+}
+
+.productCardGlowBlue {
+  background: rgba(59, 130, 246, 0.3);
+}
+
+.productIcon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  margin-bottom: 1.5rem;
+  font-size: 1.75rem;
+}
+
+.productIconTeal {
+  background: rgba(0, 212, 170, 0.15);
+}
+
+.productIconBlue {
+  background: rgba(59, 130, 246, 0.15);
+}
+
+.productLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.productLabelTeal {
+  color: #00d4aa;
+}
+
+.productLabelBlue {
+  color: #3b82f6;
+}
+
+.productName {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem 0;
+}
+
+.productDescription {
+  font-size: 1rem;
+  color: var(--ifm-font-color-secondary);
+  line-height: 1.6;
+  margin: 0 0 1.5rem 0;
+}
+
+.productFeatures {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+}
+
+.productFeatures li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9375rem;
+  color: var(--ifm-font-color-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.productFeatures li::before {
+  content: '✓';
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+}
+
+.productCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+}
+
+.productCta span {
+  transition: transform 0.2s ease;
+}
+
+.productCard:hover .productCta span {
+  transform: translateX(4px);
+}
+
+/* ============================================
+   CATEGORY CARDS
+   ============================================ */
+
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.categoryCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.75rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+.categoryCard:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  color: inherit;
+}
+
+.categoryIcon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 212, 170, 0.1);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.categoryIconBlue {
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.categoryIconPurple {
+  background: rgba(139, 92, 246, 0.1);
+}
+
+.categoryIconOrange {
+  background: rgba(249, 115, 22, 0.1);
+}
+
+.categoryName {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.categoryDescription {
+  font-size: 0.875rem;
+  color: var(--ifm-font-color-secondary);
+  margin: 0 0 1rem 0;
+  line-height: 1.5;
+}
+
+.categoryCount {
+  font-size: 0.8125rem;
+  color: var(--ifm-color-primary);
+  font-weight: 500;
+}
+
+/* ============================================
+   SECTION HEADERS
+   ============================================ */
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.sectionLabel {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ifm-color-primary);
+  margin-bottom: 1rem;
+}
+
+.sectionTitle {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.75rem 0;
+}
+
+.sectionSubtitle {
+  font-size: 1.0625rem;
+  color: var(--ifm-font-color-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   CTA SECTION
+   ============================================ */
+
+.ctaSection {
+  text-align: center;
+  padding: 4rem 2rem;
+  margin-top: 3rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+}
+
+.ctaTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+}
+
+.ctaDescription {
+  font-size: 1.0625rem;
+  color: var(--ifm-font-color-secondary);
+  margin: 0 0 2rem 0;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ctaButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.ctaPrimaryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #00d4aa 0%, #00e9bb 100%);
+  color: #0a0a0a;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 212, 170, 0.3);
+}
+
+.ctaPrimaryBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(0, 212, 170, 0.4);
+  color: #0a0a0a;
+}
+
+.ctaSecondaryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--ifm-font-color-base);
+  font-weight: 600;
+  font-size: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.ctaSecondaryBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--ifm-font-color-base);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media screen and (max-width: 996px) {
+  .productGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .categoryGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .exploreContainer {
+    padding: 3rem 1rem;
+  }
+
+  .categoryGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .productCard {
+    padding: 1.75rem;
+  }
+
+  .ctaSection {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .ctaButtons {
+    flex-direction: column;
+  }
+
+  .ctaPrimaryBtn,
+  .ctaSecondaryBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ============================================
+   LIGHT MODE
+   ============================================ */
+
+:global([data-theme='light']) .productCard {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+:global([data-theme='light']) .productCard:hover {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+:global([data-theme='light']) .categoryCard {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+:global([data-theme='light']) .categoryCard:hover {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+:global([data-theme='light']) .ctaSection {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+:global([data-theme='light']) .ctaSecondaryBtn {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+:global([data-theme='light']) .ctaSecondaryBtn:hover {
+  background: rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.16);
+}

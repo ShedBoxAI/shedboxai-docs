@@ -113,6 +113,24 @@ const config: Config = {
                 return {...item, url, priority: 1.0, changefreq: 'daily'};
               }
               
+              // Explore hub pages get high priority
+              if (url.match(/\/explore\/?$/) ||
+                  url.match(/\/explore\/shedboxai\/?$/) ||
+                  url.match(/\/explore\/agent\/?$/) ||
+                  url.match(/\/explore\/shedboxai\/compare\/?$/) ||
+                  url.match(/\/explore\/shedboxai\/use-cases\/?$/) ||
+                  url.match(/\/explore\/shedboxai\/integrations\/?$/) ||
+                  url.match(/\/explore\/agent\/compare\/?$/) ||
+                  url.match(/\/explore\/agent\/personas\/?$/) ||
+                  url.match(/\/explore\/agent\/capabilities\/?$/)) {
+                return {...item, url, priority: 0.9, changefreq: 'weekly'};
+              }
+
+              // Explore spoke pages get good priority
+              if (url.includes('/explore/')) {
+                return {...item, url, priority: 0.8, changefreq: 'weekly'};
+              }
+
               // Landing pages get high priority
               if (url.includes('/claude-code-integration') ||
                   url.includes('/ai-configuration-generation') ||
@@ -276,6 +294,7 @@ const config: Config = {
           position: 'left',
           label: 'Docs',
         },
+        {to: '/explore', label: 'Explore', position: 'left'},
         {to: '/docs/examples', label: 'Examples', position: 'left'},
         {to: '/marketplace', label: 'Marketplace', position: 'left'},
         {to: '/blog', label: 'Blog', position: 'left'},
